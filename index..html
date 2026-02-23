@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="ROOT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#131921">
+<title>VetMart — India's #1 Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   VetMart v10 — Amazon.ae Level UI/UX
+   Premium Logo · RTL/LTR · EN/हि/عر
+   INR/USD/AED · Crash-proof · Next Level
+══════════════════════════════════════════ */
+:root{
+  /* VetMart Brand — Deep Forest Green */
+  --vm-dark:#0f2318;
+  --vm-mid:#1a3d28;
+  --vm-green:#1e6b3c;
+  --vm-light:#27a358;
+  --vm-pale:#e8f5ec;
+  --vm-mint:#c6ecd4;
+  /* Amazon-style warm accents */
+  --or:#f5a623;--or2:#e8870d;--or3:#ff9900;
+  --red:#c0392b;--blue:#146eb4;
+  /* Ink */
+  --ink:#0f1111;--ink2:#333;--muted:#565959;--light:#8d9494;
+  /* Surfaces — Amazon white/cream */
+  --bg:#eaeded;--bg2:#f3f3f3;--card:#fff;--bd:#d5d9d9;--bd2:#e6e6e6;
+  /* Typography */
+  --fn:'Plus Jakarta Sans',system-ui,sans-serif;
+  --fn-ar:'Noto Sans Arabic',sans-serif;
+  --fn-hi:'Noto Sans Devanagari',sans-serif;
+  /* Shadows */
+  --s1:0 1px 3px rgba(0,0,0,.1),0 2px 6px rgba(0,0,0,.06);
+  --s2:0 2px 8px rgba(0,0,0,.14);
+  --s3:0 4px 20px rgba(0,0,0,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:14px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fn);max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:60px;overflow-x:hidden}
+body.ar-mode{font-family:var(--fn-ar)}
+body.hi-mode{font-family:var(--fn-hi)}
+button,input,select,textarea{font-family:inherit;border:none;outline:none;background:none;cursor:pointer}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:0;height:0}
+
+/* ── RTL ENGINE ── */
+[dir=rtl]{direction:rtl;text-align:right}
+[dir=rtl] .hdr-row,[dir=rtl] .addr-row,[dir=rtl] .bot-nav,
+[dir=rtl] .modal-head,[dir=rtl] .cart-row,[dir=rtl] .qty-ctrl,
+[dir=rtl] .sum-row,[dir=rtl] .step-row,[dir=rtl] .cnt-row,
+[dir=rtl] .prod-row,[dir=rtl] .ord-row,[dir=rtl] .ftr-col,
+[dir=rtl] .cat-icon-row,[dir=rtl] .deal-brand-row,[dir=rtl] .flash-row,
+[dir=rtl] .fc-row,[dir=rtl] .seller-stat-row,[dir=rtl] .lang-row,
+[dir=rtl] .pm-row{flex-direction:row-reverse}
+[dir=rtl] .srch-inp{text-align:right}
+[dir=rtl] .otp-boxes,[dir=rtl] .timer-seg-row,[dir=rtl] .promo-code{direction:ltr}
+[dir=rtl] .arrow-r{transform:scaleX(-1)}
+[dir=rtl] .fab{right:auto;left:12px}
+[dir=rtl] .slide-txt{text-align:right}
+[dir=rtl] .b-art{right:auto;left:-8px}
+/* Logical inline start for discount/wish badges */
+.disc-lbl{position:absolute;top:0;inset-inline-start:0;background:var(--red);color:#fff;font-size:8px;font-weight:800;padding:2px 7px;border-radius:0 0 4px 0;z-index:3}
+.wish-ic{position:absolute;top:6px;inset-inline-end:6px;width:28px;height:28px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;z-index:2;box-shadow:var(--s1)}
+.hdr-cnt-badge{position:absolute;top:-5px;inset-inline-end:-6px;background:var(--or);color:var(--vm-dark);font-size:8px;font-weight:900;min-width:16px;height:16px;border-radius:8px;padding:0 3px;display:flex;align-items:center;justify-content:center;line-height:1;z-index:5}
+
+/* ══════════════════════════════════
+   AMAZON-STYLE HEADER
+══════════════════════════════════ */
+.app-hdr{background:var(--vm-dark);position:sticky;top:0;z-index:300}
+
+/* ── PREMIUM LOGO BAR ── */
+.logo-bar{display:flex;align-items:center;gap:10px;padding:9px 12px 6px}
+.logo-wrap{flex:1;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;min-width:0}
+
+/* SVG Mark — Medical cross in circle */
+.logo-mark{width:36px;height:36px;flex-shrink:0;position:relative}
+.logo-mark svg{width:100%;height:100%}
+
+/* Wordmark */
+.logo-wm{display:flex;flex-direction:column;gap:0;line-height:1}
+.logo-name{display:flex;align-items:center;gap:1px}
+.lw-vet{font-size:20px;font-weight:900;color:#fff;font-style:italic;letter-spacing:-.5px;line-height:1}
+.lw-sep{width:4px;height:4px;background:var(--or);border-radius:50%;margin:0 1px 4px;flex-shrink:0;align-self:flex-end}
+.lw-mart{font-size:20px;font-weight:900;color:var(--or);font-style:italic;letter-spacing:-.5px;line-height:1}
+/* Amazon smile line */
+.logo-smile{height:3px;background:linear-gradient(90deg,transparent 5%,var(--or) 20%,var(--or) 75%,transparent 95%);border-radius:2px;margin-top:2px;position:relative}
+.logo-smile::after{content:'▶';position:absolute;right:-1px;top:-5px;font-size:7px;color:var(--or);line-height:1}
+[dir=rtl] .logo-smile::after{right:auto;left:-1px;transform:scaleX(-1)}
+.logo-tag{font-size:7px;color:rgba(255,255,255,.4);letter-spacing:.7px;font-weight:600;text-transform:uppercase;margin-top:3px}
+
+/* Header right icons */
+.hdr-icons{display:flex;gap:4px;flex-shrink:0}
+.hic{width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;border-radius:6px;transition:background .15s}
+.hic:active{background:rgba(255,255,255,.12)}
+.hic svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hic-lbl{font-size:8px;color:rgba(255,255,255,.7);font-weight:600;position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);white-space:nowrap}
+
+/* ── AMAZON-STYLE SEARCH BAR ── */
+.srch-bar{display:flex;align-items:center;margin:0 10px 8px;gap:8px}
+.srch-inner{flex:1;display:flex;align-items:center;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.srch-inner svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;margin:0 10px}
+.srch-inp{flex:1;font-size:13px;color:var(--ink);padding:10px 0;background:transparent;min-width:0}
+.srch-inp::placeholder{color:#aaa;font-size:12px}
+.srch-cam-btn{width:42px;height:100%;background:var(--bg2);border-inline-start:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;color:var(--muted)}
+.srch-cam-btn:active{background:var(--bd)}
+.srch-drop{position:absolute;top:100%;left:10px;right:10px;background:#fff;border-radius:0 0 8px 8px;box-shadow:var(--s3);z-index:500;display:none;max-height:260px;overflow-y:auto;border-top:1px solid var(--bd)}
+.srch-pos{position:relative}
+.srch-drop.open{display:block}
+.sug-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--bd2);cursor:pointer}
+.sug-row:last-child{border:0}
+.sug-row:active{background:var(--bg2)}
+.sug-em{width:38px;height:38px;background:var(--bg);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--bd)}
+.sug-info{flex:1;min-width:0}
+.sug-nm{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sug-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.sug-pr{font-size:12px;font-weight:800;color:var(--red);flex-shrink:0}
+
+/* ── LOCATION BAR ── */
+.addr-row{display:flex;align-items:center;gap:5px;padding:5px 12px 8px;background:var(--vm-mid)}
+.addr-pin{font-size:14px}
+.addr-lbl{font-size:10px;color:rgba(255,255,255,.65);font-weight:500}
+.addr-val{font-size:11px;font-weight:800;color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.addr-btn{font-size:10px;font-weight:700;color:var(--or);background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);border-radius:4px;padding:3px 8px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.addr-btn:active{background:rgba(245,166,35,.25)}
+
+/* ── LANG & CURRENCY STRIP ── */
+.lang-row{display:flex;align-items:center;gap:6px;padding:6px 12px;background:#fff;border-bottom:1px solid var(--bd);overflow-x:auto}
+.lang-row::-webkit-scrollbar{display:none}
+.lpill{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;border:1.5px solid var(--bd);cursor:pointer;white-space:nowrap;color:var(--ink2);transition:all .15s;background:#fff}
+.lpill.on{background:var(--vm-dark);color:#fff;border-color:var(--vm-dark)}
+.cpill{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;border:1.5px solid var(--bd);cursor:pointer;white-space:nowrap;color:var(--ink2);transition:all .15s;background:#fff}
+.cpill.on{background:var(--or2);color:#fff;border-color:var(--or2)}
+.lsep{width:1px;height:14px;background:var(--bd);flex-shrink:0}
+.dir-lbl{margin-inline-start:auto;font-size:9px;font-weight:700;color:var(--muted);background:var(--bg);padding:3px 8px;border-radius:10px;border:1px solid var(--bd);flex-shrink:0}
+
+/* ════════════════════════════════════
+   AMAZON-STYLE CATEGORY ICON NAV
+════════════════════════════════════ */
+.cat-nav{background:#fff;padding:10px 0 6px;border-bottom:1px solid var(--bd)}
+.cat-nav-scroll{display:flex;overflow-x:auto;gap:0;padding:0 6px}
+.cat-nav-scroll::-webkit-scrollbar{display:none}
+.cat-icon{display:flex;flex-direction:column;align-items:center;gap:5px;padding:3px 7px;cursor:pointer;flex-shrink:0;min-width:62px;transition:opacity .15s}
+.cat-icon:active{opacity:.7}
+/* Amazon-style square icon box */
+.ci-box{width:52px;height:52px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+/* Each category has distinct gradient bg */
+.ci-prime{background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid var(--or)}
+.ci-fashion{background:linear-gradient(135deg,#2d1b4e,#6b21a8)}
+.ci-deals{background:linear-gradient(135deg,#7f1d1d,#dc2626)}
+.ci-credit{background:linear-gradient(135deg,#1e3a5f,#2563eb)}
+.ci-bazaar{background:linear-gradient(135deg,#78350f,#f59e0b)}
+.ci-daily{background:linear-gradient(135deg,#14532d,#22c55e)}
+.ci-mobile{background:linear-gradient(135deg,#0c4a6e,#0ea5e9)}
+.ci-elec{background:linear-gradient(135deg,#1e1b4b,#4f46e5)}
+.ci-beauty{background:linear-gradient(135deg,#831843,#ec4899)}
+.ci-outlet{background:linear-gradient(135deg,#4c1d95,#8b5cf6)}
+.ci-comp{background:linear-gradient(135deg,#0f2218,#1a6b3c)}
+.ci-gaming{background:linear-gradient(135deg,#0c1a3d,#1d4ed8)}
+.ci-toys{background:linear-gradient(135deg,#7c2d12,#ea580c)}
+.ci-books{background:linear-gradient(135deg,#451a03,#92400e)}
+.ci-sports{background:linear-gradient(135deg,#064e3b,#10b981)}
+.ci-tools{background:linear-gradient(135deg,#1c1917,#57534e)}
+.ci-home{background:linear-gradient(135deg,#0c4a6e,#0284c7)}
+.ci-baby{background:linear-gradient(135deg,#701a75,#d946ef)}
+.ci-app{background:linear-gradient(135deg,#7f1d1d,#ef4444)}
+.ci-pet{background:linear-gradient(135deg,#14532d,#16a34a)}
+.ci-lbl{font-size:9px;font-weight:700;color:var(--ink2);text-align:center;line-height:1.25;white-space:nowrap}
+.ci-inner{font-size:26px;line-height:1;position:relative;z-index:1}
+/* Prime special badge */
+.prime-ic::after{content:'PRIME';position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:5.5px;font-weight:900;color:var(--or);letter-spacing:.5px}
+
+/* ════════════════════════════
+   FLASH SALE TIMER
+════════════════════════════ */
+.flash-bar{background:linear-gradient(90deg,#6b0000,#b91c1c,#9b1c1c);padding:9px 14px;cursor:pointer;overflow:hidden;position:relative}
+.flash-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);animation:sheen 2.4s ease-in-out infinite}
+@keyframes sheen{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.flash-row{display:flex;align-items:center;gap:10px}
+.flash-em{font-size:22px;flex-shrink:0}
+.flash-info{flex:1;min-width:0}
+.flash-ttl{font-size:12px;font-weight:800;color:#fff;line-height:1.3}
+.flash-sub{font-size:9px;color:rgba(255,255,255,.72);margin-top:1px}
+.timer-seg-row{display:flex;gap:3px;flex-shrink:0;direction:ltr}
+.t-seg{background:rgba(0,0,0,.35);border-radius:5px;padding:4px 6px;text-align:center;min-width:30px}
+.t-num{font-size:16px;font-weight:900;color:#fff;line-height:1;display:block;font-variant-numeric:tabular-nums}
+.t-lbl{font-size:6px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.4px}
+.t-col{font-size:18px;font-weight:900;color:rgba(255,255,255,.35);align-self:center;margin-bottom:3px}
+
+/* ════════════════════════════
+   PROMO STRIP
+════════════════════════════ */
+.promo-bar{background:var(--vm-dark);padding:7px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;position:relative;overflow:hidden}
+.promo-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);animation:sheen 3s ease-in-out infinite 1s}
+.promo-txt{font-size:11px;font-weight:700;color:#fff;flex:1;line-height:1.4}
+.promo-code{background:rgba(255,255,255,.1);border:1.5px dashed rgba(245,166,35,.6);border-radius:5px;padding:3px 10px;font-size:10px;font-weight:900;color:var(--or);letter-spacing:.5px;flex-shrink:0;direction:ltr}
+
+/* ════════════════════════════
+   BANNER SLIDER — Amazon style
+════════════════════════════ */
+.bnr-wrap{overflow:hidden;position:relative}
+.bnr-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
+.bnr-scroll::-webkit-scrollbar{display:none}
+.bslide{min-width:100%;height:170px;scroll-snap-align:start;display:flex;align-items:flex-end;position:relative;overflow:hidden;cursor:pointer}
+.bs1{background:linear-gradient(120deg,#0d2a4e 0%,#1a4a8a 50%,#6b21a8 100%)}
+.bs2{background:linear-gradient(120deg,#0f1f12 0%,#1a6b3c 50%,#4ade80 100%)}
+.bs3{background:linear-gradient(120deg,#3b0000 0%,#991b1b 50%,#f59e0b 100%)}
+.bs4{background:linear-gradient(120deg,#0c1a3d 0%,#1d4ed8 50%,#7c3aed 100%)}
+.slide-txt{padding:18px 16px;z-index:2;max-width:68%;position:relative}
+.s-badge{display:inline-block;background:var(--or);color:var(--vm-dark);font-size:8px;font-weight:800;padding:2px 9px;border-radius:20px;margin-bottom:8px;letter-spacing:.6px;text-transform:uppercase}
+.s-h1{font-size:17px;font-weight:900;color:#fff;line-height:1.2;letter-spacing:-.3px;margin-bottom:5px}
+.s-sub{font-size:10px;color:rgba(255,255,255,.75);line-height:1.55;margin-bottom:10px}
+.s-cta{display:inline-block;background:#fff;color:var(--ink);font-size:11px;font-weight:800;padding:7px 16px;border-radius:7px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(0,0,0,.22)}
+.s-cta:active{opacity:.85}
+.b-art{position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:92px;opacity:.9;pointer-events:none;filter:drop-shadow(-4px 3px 12px rgba(0,0,0,.3));z-index:1;line-height:1}
+.bdots{display:flex;justify-content:center;gap:5px;padding:7px 0;background:#fff}
+.bdot{width:6px;height:6px;border-radius:50%;background:var(--bd);cursor:pointer;transition:all .3s}
+.bdot.on{background:var(--or);transform:scale(1.2)}
+
+/* ════════════════════════════
+   FEATURED BRANDS — Amazon style
+════════════════════════════ */
+.brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px;background:#fff;margin-bottom:4px}
+.brand-tile{border:1px solid var(--bd);border-radius:8px;overflow:hidden;height:90px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:box-shadow .18s}
+.brand-tile:hover{box-shadow:var(--s2)}
+.brand-tile:active{opacity:.85}
+.bt-off{position:absolute;top:0;inset-inline-start:0;background:var(--red);color:#fff;font-size:7.5px;font-weight:800;padding:2px 7px;border-radius:0 0 4px 0}
+.bt-content{display:flex;align-items:center;justify-content:center;width:100%;height:100%;flex-direction:column;gap:6px}
+.bt-em{font-size:30px}
+.bt-nm{font-size:12px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.bt-sub{font-size:8px;color:rgba(255,255,255,.7);letter-spacing:.3px;text-transform:uppercase}
+
+/* ════════════════════════════
+   SECTION WRAPPER
+════════════════════════════ */
+.sec{background:#fff;padding:14px;margin-bottom:4px}
+.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.sec-ttl{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.4px}
+.sec-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.see-all{font-size:11px;font-weight:700;color:var(--blue);cursor:pointer;display:flex;align-items:center;gap:3px;flex-shrink:0;padding:2px 0;white-space:nowrap}
+.arrow-r{font-size:12px;font-weight:900}
+
+/* H-SCROLL */
+.h-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:3px}
+.h-scroll::-webkit-scrollbar{display:none}
+
+/* ════════════════════════════
+   RECENTLY VIEWED CARD
+════════════════════════════ */
+.rv-card{min-width:110px;background:#fff;border-radius:8px;border:1px solid var(--bd);cursor:pointer;overflow:hidden;flex-shrink:0;box-shadow:var(--s1);transition:box-shadow .18s}
+.rv-card:hover{box-shadow:var(--s2)}
+.rv-img{height:90px;background:linear-gradient(135deg,#f8fafa,#eaeded);display:flex;align-items:center;justify-content:center;font-size:42px;border-bottom:1px solid var(--bd2)}
+.rv-body{padding:7px 8px}
+.rv-nm{font-size:11px;font-weight:600;color:var(--ink);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rv-pr{font-size:13px;font-weight:800;color:var(--red);margin-top:4px}
+.rv-off{font-size:9px;font-weight:700;color:var(--muted);margin-top:1px}
+
+/* ════════════════════════════
+   18-CAT GRID — 3-column
+════════════════════════════ */
+.cat18-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cat18-item{background:#fff;border:1px solid var(--bd);border-radius:8px;overflow:hidden;cursor:pointer;transition:box-shadow .18s}
+.cat18-item:hover{box-shadow:var(--s2)}
+.cat18-item:active{opacity:.8}
+.cat18-img{height:72px;display:flex;align-items:center;justify-content:center;font-size:32px;border-bottom:1px solid var(--bd2)}
+.cat18-nm{font-size:10px;font-weight:700;color:var(--ink2);text-align:center;padding:5px 4px;line-height:1.3}
+
+/* ════════════════════════════
+   PRODUCT CARD — Amazon grid
+════════════════════════════ */
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pcard{background:#fff;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid var(--bd);position:relative;transition:box-shadow .18s}
+.pcard:hover{box-shadow:var(--s2)}
+.pcard:active{opacity:.9}
+.pc-imgw{position:relative;background:linear-gradient(135deg,#f8fafa,#f0f2f2);display:flex;align-items:center;justify-content:center;aspect-ratio:1;border-bottom:1px solid var(--bd2)}
+.pc-em{font-size:60px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.12))}
+.pc-badges{position:absolute;top:0;left:0;right:0;display:flex;gap:3px;padding:5px 6px;z-index:3;flex-wrap:wrap}
+.pcb{font-size:8px;font-weight:800;padding:2px 6px;border-radius:3px;letter-spacing:.2px}
+.pcb-hot{background:#b91c1c;color:#fff}
+.pcb-new{background:var(--vm-light);color:#fff}
+.pcb-sale{background:var(--or2);color:#fff}
+.pcb-prime{background:var(--vm-dark);color:var(--or);border:1px solid var(--or)}
+.pcb-vet{background:var(--blue);color:#fff}
+.pc-body{padding:8px 9px 10px}
+.pc-brand{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+.pc-en{font-size:12px;font-weight:700;color:var(--ink);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-hi{font-size:11px;font-weight:600;color:var(--ink2);line-height:1.4;font-family:var(--fn-hi);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-ar{font-size:11px;font-weight:600;color:var(--ink2);line-height:1.4;font-family:var(--fn-ar);direction:rtl;text-align:right;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-rat{display:flex;align-items:center;gap:4px;margin-top:5px}
+.rat-stars{color:#ffa41c;font-size:11px;letter-spacing:-1px}
+.rat-cnt{font-size:9px;color:var(--blue)}
+.pc-price-row{display:flex;align-items:baseline;gap:5px;margin-top:4px;flex-wrap:wrap}
+.pc-price{font-size:16px;font-weight:900;color:var(--red)}
+.pc-mrp{font-size:10px;color:var(--muted);text-decoration:line-through}
+.pc-off{font-size:9px;font-weight:700;color:var(--red)}
+.pc-del{font-size:9px;color:var(--blue);margin-top:2px;font-weight:600}
+.pc-seller{font-size:8px;color:var(--muted);margin-top:2px}
+.pc-atc{width:100%;background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;border-radius:7px;color:var(--ink);font-size:11px;font-weight:700;padding:8px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:5px;font-family:inherit}
+.pc-atc:active{background:linear-gradient(180deg,#f8c200,#e8b400)}
+
+/* ════════════════════════════
+   QUICK DEALS
+════════════════════════════ */
+.qdeal{display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--bd);border-radius:8px;margin-bottom:7px;cursor:pointer;background:#fff;transition:box-shadow .15s}
+.qdeal:hover{box-shadow:var(--s2)}
+.qdeal:active{opacity:.85}
+.qd-img{width:56px;height:56px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;border:1px solid var(--bd)}
+.qd-info{flex:1;min-width:0}
+.qd-nm{font-size:12px;font-weight:700;color:var(--ink)}
+.qd-sub{font-size:9px;color:var(--muted);margin-top:2px}
+.qd-pr{font-size:15px;font-weight:900;color:var(--red);margin-top:3px}
+.qd-off{font-size:9px;color:var(--muted);font-weight:600}
+.qd-btn{background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;color:var(--ink);padding:7px 13px;border-radius:7px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0;font-family:inherit}
+.qd-btn:active{opacity:.82}
+
+/* ════════════════════════════
+   3-COL STILL LOOKING
+════════════════════════════ */
+.still-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.still-item{background:#fff;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid var(--bd);transition:box-shadow .15s}
+.still-item:hover{box-shadow:var(--s2)}
+.still-item:active{opacity:.8}
+.si-img{background:linear-gradient(135deg,#f8fafa,#eaeded);padding:12px;font-size:30px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bd2)}
+.si-lbl{font-size:9.5px;font-weight:700;text-align:center;padding:6px 4px;color:var(--ink2);line-height:1.3}
+
+/* ════════════════════════════
+   TRUST STRIP
+════════════════════════════ */
+.trust-strip{display:flex;padding:10px 6px;background:#fff;border-top:1px solid var(--bd)}
+.ti{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.ti-em{font-size:20px}
+.ti-lbl{font-size:9px;font-weight:700;text-align:center;color:var(--ink2);line-height:1.25}
+.ti-sub{font-size:8px;color:var(--muted);text-align:center}
+
+/* ════════════════════════════
+   REVIEW CARDS
+════════════════════════════ */
+.rev-card{min-width:240px;background:#fff;border-radius:8px;border:1px solid var(--bd);padding:12px;flex-shrink:0;box-shadow:var(--s1)}
+.rev-meta{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.rev-av{width:36px;height:36px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:1.5px solid var(--bd)}
+.rev-nm{font-size:12px;font-weight:700;color:var(--ink)}
+.rev-dt{font-size:9px;color:var(--muted);margin-top:1px}
+.rev-stars{color:#ffa41c;font-size:12px;letter-spacing:-1px;margin-top:2px}
+.rev-txt{font-size:11px;color:var(--ink2);line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rev-prod{font-size:9px;color:var(--muted);margin-top:5px;font-weight:600}
+.rev-ver{font-size:8px;font-weight:700;color:var(--blue);margin-top:4px}
+/* Write review */
+.write-rev{background:var(--bg);border-radius:8px;padding:12px;margin-top:12px;border:1px solid var(--bd)}
+.wr-ttl{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:8px}
+.star-pick{display:flex;gap:4px;margin-bottom:8px}
+.sp-btn{font-size:22px;cursor:pointer;opacity:.35;transition:opacity .15s;background:none;border:none;padding:0}
+.sp-btn.on{opacity:1}
+.wr-inp{width:100%;border:1px solid var(--bd);border-radius:6px;padding:10px 11px;font-size:12px;background:#fff;color:var(--ink);font-family:inherit;resize:none;min-height:68px}
+.wr-inp:focus{border-color:var(--or)}
+.wr-row{display:flex;gap:8px;margin-top:8px}
+.wr-nm{flex:1;border:1px solid var(--bd);border-radius:6px;padding:10px 11px;font-size:12px;background:#fff;color:var(--ink);font-family:inherit}
+.wr-nm:focus{border-color:var(--or)}
+.wr-sub{background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;color:var(--ink);font-size:11px;font-weight:800;padding:10px 14px;border-radius:6px;cursor:pointer;white-space:nowrap;font-family:inherit}
+
+/* ════════════════════════════
+   IMPORT TOOL
+════════════════════════════ */
+.import-box{border:2px dashed var(--vm-light);border-radius:10px;padding:14px;background:linear-gradient(135deg,#f0faf4,#fff)}
+.imp-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:9px}
+.imp-inp{width:100%;border:1.5px solid var(--bd);border-radius:7px;padding:10px 12px;font-size:12px;background:#fff;color:var(--ink);font-family:inherit}
+.imp-inp:focus{border-color:var(--vm-light)}
+.imp-prev{background:var(--bg);border-radius:8px;padding:11px;margin-top:9px;display:none;gap:10px;align-items:flex-start;border:1px solid var(--bd)}
+.imp-prev.show{display:flex}
+.imp-em{font-size:30px;width:46px;height:46px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid var(--bd);flex-shrink:0}
+.imp-add{width:100%;background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;color:var(--ink);padding:10px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;margin-top:9px;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px}
+
+/* ════════════════════════════
+   SELLER PORTAL SECTION
+════════════════════════════ */
+.sell-hero{background:linear-gradient(140deg,var(--vm-dark),var(--vm-mid),var(--vm-green));border-radius:12px;padding:18px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden}
+.sell-hero::after{content:'🛒';position:absolute;right:-12px;top:-12px;font-size:76px;opacity:.12}
+.sell-hero h3{font-size:17px;font-weight:900;color:#fff;margin:8px 0 5px}
+.sell-hero p{font-size:11px;color:rgba(255,255,255,.78);line-height:1.55}
+.sell-stat-row{display:flex;margin-top:13px;border-top:1px solid rgba(255,255,255,.15);padding-top:12px;gap:0}
+.ss-item{flex:1;text-align:center;border-inline-end:1px solid rgba(255,255,255,.15)}
+.ss-item:last-child{border:0}
+.ss-num{font-size:17px;font-weight:900;color:#fff}
+.ss-lbl{font-size:8px;color:rgba(255,255,255,.6);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.sell-step{display:flex;align-items:flex-start;gap:10px;padding:11px;background:var(--bg);border-radius:8px;border:1px solid var(--bd);margin-bottom:7px}
+.ss-num2{width:26px;height:26px;border-radius:50%;background:var(--vm-green);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ss-ttl{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.ss-sub{font-size:10px;color:var(--muted);line-height:1.55}
+
+/* FORM ELEMENTS */
+.fg{margin-bottom:11px}
+.fg label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+[dir=rtl] .fg label{text-align:right}
+.finp{width:100%;border:1px solid var(--bd);border-radius:7px;padding:11px 12px;font-size:13px;background:#fff;color:var(--ink);font-family:inherit}
+.finp:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(245,166,35,.12)}
+.fsel{width:100%;border:1px solid var(--bd);border-radius:7px;padding:11px 12px;font-size:13px;background:#fff;color:var(--ink);font-family:inherit;-webkit-appearance:none}
+.fsel:focus{border-color:var(--or)}
+.ftarea{width:100%;border:1px solid var(--bd);border-radius:7px;padding:11px 12px;font-size:12px;background:#fff;color:var(--ink);font-family:inherit;resize:vertical;min-height:80px}
+.ftarea:focus{border-color:var(--or)}
+.form-row{display:flex;gap:9px}
+.form-row .fg{flex:1;margin-bottom:0}
+.fbtn{width:100%;padding:13px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s}
+.fbtn.amazon-yel{background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;color:var(--ink)}
+.fbtn.grn{background:linear-gradient(135deg,var(--vm-dark),var(--vm-green));color:#fff;box-shadow:0 3px 12px rgba(26,61,40,.22)}
+.fbtn.wht{background:#fff;color:var(--vm-green);border:2px solid var(--vm-green)}
+.fbtn:active{opacity:.87;transform:scale(.98)}
+.div-or{text-align:center;color:var(--muted);font-size:11px;margin:12px 0;position:relative}
+.div-or::before,.div-or::after{content:'';position:absolute;top:50%;width:35%;height:1px;background:var(--bd)}
+.div-or::before{left:0}
+.div-or::after{right:0}
+.soc-btns{display:flex;gap:8px}
+.soc-b{flex:1;border:1px solid var(--bd);background:#fff;border-radius:7px;padding:11px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;font-family:inherit;transition:border-color .15s}
+.soc-b:active{border-color:var(--vm-green);transform:scale(.97)}
+.otp-boxes{display:flex;gap:7px;direction:ltr;margin-top:10px}
+.otp-i{flex:1;border:1px solid var(--bd);border-radius:7px;padding:11px;font-size:19px;font-weight:800;text-align:center;max-width:48px;font-family:'Plus Jakarta Sans',monospace}
+.otp-i:focus{border-color:var(--or)}
+
+/* ════════════════════════════
+   PAYMENTS
+════════════════════════════ */
+.pay-cards{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.pay-c{flex:1;min-width:calc(33% - 5px);border:1.5px solid var(--bd);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;background:#fff;transition:all .15s}
+.pay-c.on{border-color:var(--or);background:#fffbf0}
+.pay-c:active{transform:scale(.93)}
+.pay-em{font-size:22px;margin-bottom:3px}
+.pay-nm{font-size:10px;font-weight:700;color:var(--ink)}
+.pay-ds{font-size:8px;color:var(--muted);margin-top:2px;line-height:1.3}
+.method-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.mchip{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:3px 10px;font-size:10px;font-weight:700;color:var(--ink2)}
+
+/* ════════════════════════════
+   FOOTER
+════════════════════════════ */
+.ftr-strip{background:var(--vm-dark)}
+.ftr-links{display:flex;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.1)}
+.ftr-link{flex:1;min-width:50%;padding:13px 12px;font-size:11px;font-weight:700;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.75);transition:color .15s}
+.ftr-link:hover{color:#fff}
+.ftr-link:nth-child(odd){border-inline-end:1px solid rgba(255,255,255,.08)}
+[dir=rtl] .ftr-link:nth-child(odd){border-inline-end:none;border-inline-start:1px solid rgba(255,255,255,.08)}
+.fl-em{font-size:14px;flex-shrink:0}
+.ftr-copy{padding:16px;text-align:center;font-size:9px;color:rgba(255,255,255,.35);line-height:1.9}
+.ftr-copy span{color:rgba(255,255,255,.55);font-weight:600}
+
+/* ════════════════════════════
+   BOTTOM NAV — Amazon style
+════════════════════════════ */
+.bot-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#232f3e;border-top:1px solid rgba(255,255,255,.12);display:flex;z-index:400;box-shadow:0 -2px 12px rgba(0,0,0,.3)}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 0 7px;cursor:pointer;position:relative;transition:background .15s}
+.ni.on{background:rgba(255,255,255,.08)}
+.ni:active{background:rgba(255,255,255,.15)}
+.ni-em{font-size:22px;line-height:1}
+.ni-lbl{font-size:9px;font-weight:700;color:rgba(255,255,255,.55);margin-top:3px;white-space:nowrap}
+.ni.on .ni-lbl{color:var(--or)}
+.ni-cnt-bdg{position:absolute;top:5px;inset-inline-end:18%;background:var(--or);color:var(--vm-dark);font-size:8px;font-weight:900;width:16px;height:16px;border-radius:50%;display:none;align-items:center;justify-content:center;z-index:2}
+
+/* MODALS */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:600;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(5px)}
+.overlay.open{display:flex}
+.modal{background:#fff;width:100%;max-width:430px;border-radius:18px 18px 0 0;max-height:94vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.34,1.18,.64,1)}
+@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
+.m-handle{width:36px;height:4px;background:var(--bd);border-radius:2px;margin:11px auto 0}
+.modal-head{display:flex;align-items:center;gap:10px;padding:13px 15px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:#fff;z-index:5}
+.modal-ttl{font-size:17px;font-weight:800;flex:1;letter-spacing:-.4px;color:var(--ink)}
+.modal-x{background:var(--bg);width:30px;height:30px;border-radius:50%;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);border:none}
+.modal-x:active{background:var(--bd)}
+.mbody{padding:15px}
+
+/* PRODUCT DETAIL */
+.pd-gallery{background:linear-gradient(135deg,#f8fafa,#f0f2f2);border-radius:10px;height:220px;display:flex;align-items:center;justify-content:center;font-size:110px;margin-bottom:13px;position:relative;border:1px solid var(--bd2)}
+.pd-brand{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+.pd-en{font-size:17px;font-weight:800;color:var(--ink);line-height:1.25;margin-bottom:3px;letter-spacing:-.3px}
+.pd-hi{font-size:14px;font-weight:600;color:var(--ink2);font-family:var(--fn-hi);margin-bottom:3px;line-height:1.4}
+.pd-ar{font-size:14px;font-weight:600;color:var(--ink2);font-family:var(--fn-ar);direction:rtl;text-align:right;line-height:1.4}
+.pd-rat-row{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid var(--bd2);border-bottom:1px solid var(--bd2);margin:8px 0}
+.pd-stars{color:#ffa41c;font-size:14px;letter-spacing:-1px}
+.pd-rat-num{font-size:14px;font-weight:800;color:var(--ink)}
+.pd-rat-cnt{font-size:11px;color:var(--blue);cursor:pointer}
+.pd-price-big{font-size:26px;font-weight:900;color:var(--red);letter-spacing:-.5px}
+.pd-mrp{font-size:13px;color:var(--muted);text-decoration:line-through;margin-inline-start:8px}
+.pd-save{font-size:13px;font-weight:700;color:var(--red);margin-inline-start:5px}
+.pd-del{font-size:11px;color:var(--blue);margin-top:4px;font-weight:600}
+.pin-checker{background:var(--bg);border-radius:8px;padding:11px;margin:10px 0;border:1px solid var(--bd)}
+.pin-row-d{display:flex;gap:8px;margin-top:8px}
+.pin-inp-d{flex:1;border:1px solid var(--bd);border-radius:7px;padding:10px 11px;font-size:13px;background:#fff;color:var(--ink)}
+.pin-inp-d:focus{border-color:var(--or)}
+.pin-chk-btn{background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;color:var(--ink);padding:10px 14px;border-radius:7px;font-size:12px;font-weight:700;white-space:nowrap;font-family:inherit}
+.pin-result-d{margin-top:7px;font-size:11px;font-weight:600;color:var(--vm-green);display:none}
+.pin-result-d.show{display:block}
+.qty-sel-row{display:flex;align-items:center;gap:10px;margin:12px 0}
+.qty-lbl{font-size:12px;font-weight:700;color:var(--ink)}
+.qty-ctrl{display:flex;align-items:center;gap:8px;background:var(--bg);border-radius:7px;padding:4px 8px;border:1px solid var(--bd)}
+.qty-b{width:28px;height:28px;border-radius:5px;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--bd)}
+.qty-b:active{background:var(--or);color:#fff;border-color:var(--or)}
+.qty-n{font-size:15px;font-weight:800;min-width:24px;text-align:center}
+.pd-atc{width:100%;background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;color:var(--ink);padding:14px;border-radius:9px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;margin-bottom:8px}
+.pd-buy{width:100%;background:linear-gradient(135deg,var(--vm-dark),var(--vm-green));color:#fff;padding:14px;border-radius:9px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;box-shadow:0 3px 12px rgba(26,61,40,.2)}
+.pd-atc:active,.pd-buy:active{opacity:.88;transform:scale(.98)}
+.desc-box{background:var(--bg);border-radius:8px;padding:12px;border:1px solid var(--bd);margin:12px 0}
+.desc-ttl{font-size:11px;font-weight:800;color:var(--vm-green);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.spec-table{margin:12px 0}
+.spec-row{display:flex;padding:8px 0;border-bottom:1px solid var(--bd2)}
+.spec-row:last-child{border:0}
+.spec-k{font-size:11px;color:var(--muted);width:110px;flex-shrink:0;font-weight:600}
+.spec-v{font-size:11px;color:var(--ink);font-weight:700;flex:1}
+
+/* CART */
+.cart-row{display:flex;gap:10px;align-items:flex-start;padding:11px;background:var(--bg);border-radius:8px;border:1px solid var(--bd);margin-bottom:8px}
+.ci-img{font-size:30px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:7px;border:1px solid var(--bd);flex-shrink:0}
+.ci-info{flex:1;min-width:0}
+.ci-nm{font-size:12px;font-weight:700;color:var(--ink);line-height:1.3}
+.ci-brand{font-size:9px;color:var(--muted);margin-top:1px}
+.ci-pr{font-size:15px;font-weight:900;color:var(--red);margin-top:4px}
+.qty-ctrl-sm{display:flex;align-items:center;gap:7px;margin-top:8px}
+.qb{background:#fff;border:1px solid var(--bd);width:26px;height:26px;border-radius:50%;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.qb:active{background:var(--or);border-color:var(--or)}
+.qn{font-size:14px;font-weight:800;min-width:20px;text-align:center}
+.q-del{font-size:10px;color:var(--blue);cursor:pointer;margin-inline-start:auto;font-weight:600}
+.cart-sum{background:var(--bg);border-radius:8px;padding:13px;margin-bottom:12px;border:1px solid var(--bd)}
+.sum-row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px}
+.sum-row.tot{font-weight:900;font-size:16px;padding-top:10px;border-top:1px dashed var(--bd);margin-bottom:0}
+.sum-grn{color:var(--vm-green);font-weight:700}
+.ck-btn{width:100%;background:linear-gradient(180deg,#ffd814,#f8c200);border:1px solid #c7a600;color:var(--ink);padding:14px;border-radius:9px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.ck-btn:active{opacity:.88}
+
+/* AUTH */
+.auth-tabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:14px}
+.atab{flex:1;padding:11px;text-align:center;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2.5px solid transparent;color:var(--muted)}
+.atab.on{color:var(--ink);border-color:var(--or)}
+
+/* TRACK */
+.trk-ord-box{background:var(--bg);border-radius:8px;padding:13px;margin-bottom:14px;border:1px solid var(--bd)}
+.step-row{display:flex;gap:12px;margin-bottom:14px;position:relative;align-items:flex-start}
+.step-row:not(:last-child)::after{content:'';position:absolute;inset-inline-start:17px;top:36px;width:2px;bottom:-14px;background:var(--bd)}
+.step-row.done::after{background:var(--vm-green)}
+.step-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;border:2px solid var(--bd);background:#fff;position:relative;z-index:2}
+.step-row.done .step-dot{background:var(--vm-green);border-color:var(--vm-green);color:#fff}
+.step-row.act .step-dot{background:var(--or2);border-color:var(--or2);color:#fff;box-shadow:0 0 0 5px rgba(232,135,13,.15)}
+.step-info{padding-top:6px;flex:1}
+.step-ttl{font-size:12px;font-weight:700;color:var(--ink)}
+.step-sub{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5}
+.step-loc{font-size:10px;color:var(--blue);margin-top:2px;font-weight:600}
+
+/* ADMIN */
+.adm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.adm-card{background:var(--bg);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--bd)}
+.adm-em{font-size:22px;margin-bottom:4px}
+.adm-num{font-size:20px;font-weight:900;color:var(--vm-green);letter-spacing:-.5px}
+.adm-lbl{font-size:10px;color:var(--muted);margin-top:3px;font-weight:600}
+.adm-trend{font-size:9px;font-weight:700;color:var(--vm-light);margin-top:2px}
+.chart-bars{display:flex;gap:5px;align-items:flex-end;height:86px;direction:ltr}
+.cbar{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(0deg,var(--vm-dark),var(--vm-light));opacity:.6;cursor:pointer;min-height:8px;transition:opacity .2s}
+.cbar.hi{opacity:1;background:linear-gradient(0deg,var(--or2),var(--or))}
+.chart-labs{display:flex;gap:5px;padding:3px 0 0;direction:ltr}
+.clab{flex:1;text-align:center;font-size:9px;color:var(--muted)}
+.clab.hi{color:var(--or2);font-weight:800}
+.ord-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;cursor:pointer;background:#fff}
+.ord-row:active{background:var(--bg)}
+.ord-em{font-size:20px;width:38px;height:38px;background:var(--bg);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ord-nm{font-size:11px;font-weight:700;color:var(--ink)}
+.ord-id{font-size:9px;color:var(--muted);margin-top:1px}
+.os{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;display:inline-block;margin-top:2px}
+.os-del{background:#d1fae5;color:#065f46}
+.os-shp{background:#dbeafe;color:#1e40af}
+.os-pen{background:#fef3c7;color:#92400e}
+
+/* NOTIF */
+.notif-row{display:flex;align-items:flex-start;gap:11px;padding:11px;border-radius:8px;margin-bottom:7px;border:1px solid var(--bd);cursor:pointer;background:#fff}
+.notif-row:active{background:var(--bg)}
+.ni-em-box{width:42px;height:42px;background:var(--vm-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ni-msg{font-size:12px;font-weight:700;color:var(--ink);line-height:1.35}
+.ni-sub2{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* SUPPORT */
+.supp-cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.supp-cat{border:1px solid var(--bd);border-radius:8px;padding:13px;text-align:center;cursor:pointer;background:#fff;transition:all .18s}
+.supp-cat:hover{border-color:var(--or);box-shadow:var(--s2)}
+.sc-em{font-size:24px;margin-bottom:4px}
+.sc-ttl{font-size:12px;font-weight:700;color:var(--ink)}
+.sc-sub{font-size:9px;color:var(--muted);margin-top:2px}
+.faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:7px;overflow:hidden}
+.faq-q{padding:12px;font-size:12px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--ink)}
+.fq-ic{font-size:16px;color:var(--muted);transition:transform .25s;flex-shrink:0}
+.faq-q.open .fq-ic{transform:rotate(45deg)}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-ans.open{max-height:300px;border-top:1px solid var(--bd2)}
+.faq-ans p{font-size:11.5px;color:var(--muted);line-height:1.8;padding:11px 12px}
+.cnt-row{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid var(--bd);border-radius:8px;cursor:pointer;margin-bottom:7px;background:#fff;transition:all .15s}
+.cnt-row:hover{border-color:var(--or);background:#fffbf0}
+.cnt-em{font-size:22px;flex-shrink:0}
+.cnt-ttl{font-size:13px;font-weight:700;color:var(--ink)}
+.cnt-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.cnt-arr{font-size:14px;color:var(--muted);flex-shrink:0}
+
+/* TOAST & FAB */
+.toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%) translateY(14px);background:rgba(10,15,10,.9);color:#fff;padding:10px 22px;border-radius:24px;font-size:12px;font-weight:600;z-index:2000;opacity:0;transition:all .26s;pointer-events:none;max-width:90vw;text-align:center;white-space:nowrap}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.fab{position:fixed;bottom:74px;right:12px;background:linear-gradient(135deg,var(--vm-dark),var(--vm-green));color:#fff;border:none;border-radius:22px;padding:9px 14px;font-size:10px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:5px;box-shadow:0 4px 18px rgba(15,35,24,.5);z-index:150;font-family:inherit;animation:fpu 2.8s ease-in-out infinite}
+@keyframes fpu{0%,100%{box-shadow:0 4px 14px rgba(15,35,24,.45)}50%{box-shadow:0 4px 28px rgba(15,35,24,.75)}}
+.fab:active{transform:scale(.93)}
+</style>
+</head>
+<body id="BODY">
+
+<!-- ════════════ HEADER ════════════ -->
+<header class="app-hdr" id="appHdr">
+  <!-- PREMIUM LOGO BAR -->
+  <div class="logo-bar">
+    <div class="logo-wrap" onclick="showT('🐾 VetMart — India\'s #1 Marketplace')">
+      <!-- PREMIUM SVG LOGO MARK -->
+      <div class="logo-mark">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer circle -->
+          <circle cx="18" cy="18" r="16" stroke="#5effa0" stroke-width="1.4" fill="none" opacity="0.7"/>
+          <!-- Medical cross -->
+          <rect x="13" y="7" width="10" height="22" rx="3" fill="white" opacity="0.92"/>
+          <rect x="7" y="13" width="22" height="10" rx="3" fill="white" opacity="0.92"/>
+          <!-- Inner accent circle -->
+          <circle cx="18" cy="18" r="5" fill="#5effa0" opacity="0.35"/>
+          <!-- Bottom orange smile curve -->
+          <path d="M10 28 Q18 33 26 28" stroke="#ff9900" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="logo-wm">
+        <div class="logo-name">
+          <span class="lw-vet">Vet</span><div class="lw-sep"></div><span class="lw-mart">Mart</span>
+        </div>
+        <div class="logo-smile"></div>
+        <div class="logo-tag" id="logoTag">India's #1 Marketplace</div>
+      </div>
+    </div>
+    <div class="hdr-icons">
+      <div class="hic" onclick="openM('notifM')">
+        <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="hdr-cnt-badge">3</span>
+      </div>
+      <div class="hic" onclick="openM('authM')">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="hic" onclick="openM('cartM');renderCart()" style="position:relative">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="hdr-cnt-badge" id="cBdg" style="display:none">0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH BAR -->
+  <div class="srch-bar">
+    <div class="srch-inner srch-pos" style="position:relative;flex:1">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="srch-inp" id="srchInp" placeholder="Search VetMart..." oninput="doSearch(this.value)" autocomplete="off">
+      <button class="srch-cam-btn" onclick="showT('📷 Camera search — coming soon!')">📷</button>
+      <div class="srch-drop" id="srchDrop"></div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="addr-row">
+    <span class="addr-pin">📍</span>
+    <span class="addr-lbl">Deliver to</span>
+    <span class="addr-val" id="addrVal">&nbsp;<strong>Noida, UP 201301</strong></span>
+    <button class="addr-btn" id="addrBtn" onclick="showT('📍 Enter delivery address')">Change</button>
+  </div>
+</header>
+
+<!-- LANG + CURRENCY STRIP -->
+<div class="lang-row">
+  <button class="lpill on" onclick="setLang('en',this)">EN</button>
+  <button class="lpill" onclick="setLang('hi',this)" style="font-family:var(--fn-hi)">हिंदी</button>
+  <button class="lpill" onclick="setLang('ar',this)" style="font-family:var(--fn-ar)">عربي</button>
+  <div class="lsep"></div>
+  <button class="cpill on" onclick="setCurr('INR',this)">₹ INR</button>
+  <button class="cpill" onclick="setCurr('USD',this)">$ USD</button>
+  <button class="cpill" onclick="setCurr('AED',this)">AED د.إ</button>
+  <div class="lsep"></div>
+  <button class="cpill" style="border-color:#e8870d;color:#e8870d" onclick="openM('sellerM')">🏪 Sell</button>
+  <div class="dir-lbl" id="dirLbl">LTR · EN</div>
+</div>
+
+<!-- 18-CATEGORY ICON NAV — Amazon style -->
+<div class="cat-nav">
+  <div class="cat-nav-scroll" id="catNavScroll">
+    <div class="cat-icon" onclick="openM('primeM')"><div class="ci-box ci-prime"><div class="ci-inner prime-ic">⭐</div></div><div class="ci-lbl" id="cl0">Prime</div></div>
+    <div class="cat-icon" onclick="actCat(this,1)"><div class="ci-box ci-fashion"><div class="ci-inner">👗</div></div><div class="ci-lbl" id="cl1">Fashion</div></div>
+    <div class="cat-icon" onclick="actCat(this,2)"><div class="ci-box ci-deals"><div class="ci-inner">🔥</div></div><div class="ci-lbl" id="cl2">Deals</div></div>
+    <div class="cat-icon" onclick="actCat(this,3)"><div class="ci-box ci-credit"><div class="ci-inner">💳</div></div><div class="ci-lbl" id="cl3">Credit Card</div></div>
+    <div class="cat-icon" onclick="actCat(this,4)"><div class="ci-box ci-bazaar"><div class="ci-inner">🛒</div></div><div class="ci-lbl" id="cl4">Bazaar</div></div>
+    <div class="cat-icon" onclick="actCat(this,5)"><div class="ci-box ci-daily"><div class="ci-inner">🥦</div></div><div class="ci-lbl" id="cl5">Daily Needs</div></div>
+    <div class="cat-icon" onclick="actCat(this,6)"><div class="ci-box ci-mobile"><div class="ci-inner">📱</div></div><div class="ci-lbl" id="cl6">Mobiles</div></div>
+    <div class="cat-icon" onclick="actCat(this,7)"><div class="ci-box ci-elec"><div class="ci-inner">💻</div></div><div class="ci-lbl" id="cl7">Electronics</div></div>
+    <div class="cat-icon" onclick="actCat(this,8)"><div class="ci-box ci-beauty"><div class="ci-inner">💄</div></div><div class="ci-lbl" id="cl8">Beauty</div></div>
+    <div class="cat-icon" onclick="actCat(this,9)"><div class="ci-box ci-outlet"><div class="ci-inner">🏷️</div></div><div class="ci-lbl" id="cl9">Outlet</div></div>
+    <div class="cat-icon" onclick="actCat(this,10)"><div class="ci-box ci-comp"><div class="ci-inner">🖥️</div></div><div class="ci-lbl" id="cl10">Computers</div></div>
+    <div class="cat-icon" onclick="actCat(this,11)"><div class="ci-box ci-gaming"><div class="ci-inner">🎮</div></div><div class="ci-lbl" id="cl11">Gaming</div></div>
+    <div class="cat-icon" onclick="actCat(this,12)"><div class="ci-box ci-toys"><div class="ci-inner">🧸</div></div><div class="ci-lbl" id="cl12">Toys</div></div>
+    <div class="cat-icon" onclick="actCat(this,13)"><div class="ci-box ci-books"><div class="ci-inner">📚</div></div><div class="ci-lbl" id="cl13">Books</div></div>
+    <div class="cat-icon" onclick="actCat(this,14)"><div class="ci-box ci-sports"><div class="ci-inner">⚽</div></div><div class="ci-lbl" id="cl14">Sports</div></div>
+    <div class="cat-icon" onclick="actCat(this,15)"><div class="ci-box ci-tools"><div class="ci-inner">🔧</div></div><div class="ci-lbl" id="cl15">Tools</div></div>
+    <div class="cat-icon" onclick="actCat(this,16)"><div class="ci-box ci-home"><div class="ci-inner">🏠</div></div><div class="ci-lbl" id="cl16">Home Care</div></div>
+    <div class="cat-icon" onclick="actCat(this,17)"><div class="ci-box ci-baby"><div class="ci-inner">👶</div></div><div class="ci-lbl" id="cl17">Baby</div></div>
+    <div class="cat-icon" onclick="actCat(this,18)"><div class="ci-box ci-app"><div class="ci-inner">🍳</div></div><div class="ci-lbl" id="cl18">Appliances</div></div>
+    <div class="cat-icon" onclick="actCat(this,19)"><div class="ci-box ci-pet"><div class="ci-inner">🐾</div></div><div class="ci-lbl" id="cl19">Pet Care</div></div>
+  </div>
+</div>
+
+<!-- FLASH SALE -->
+<div class="flash-bar" onclick="showT('⚡ Flash Sale — Shop now!')">
+  <div class="flash-row">
+    <span class="flash-em">⚡</span>
+    <div class="flash-info">
+      <div class="flash-ttl" id="flashTtl">Flash Sale — Up to 70% OFF Sitewide!</div>
+      <div class="flash-sub" id="flashSub">Mobiles · Electronics · Fashion · Pet Care · Beauty</div>
+    </div>
+    <div class="timer-seg-row">
+      <div class="t-seg"><span class="t-num" id="tH">02</span><div class="t-lbl">Hrs</div></div>
+      <span class="t-col">:</span>
+      <div class="t-seg"><span class="t-num" id="tM">34</span><div class="t-lbl">Min</div></div>
+      <span class="t-col">:</span>
+      <div class="t-seg"><span class="t-num" id="tS">18</span><div class="t-lbl">Sec</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROMO BAR -->
+<div class="promo-bar" onclick="showT('✅ Code VET40 copied! Use at checkout')">
+  <div class="promo-txt" id="promoTxt">🎉 New Customer: 40% OFF · Free delivery ₹499+ · 2M+ happy buyers</div>
+  <div class="promo-code">VET40</div>
+</div>
+
+<!-- BANNER SLIDER -->
+<div class="bnr-wrap">
+  <div class="bnr-scroll" id="bnrScroll" onscroll="updDots(this)">
+    <div class="bslide bs2" onclick="showT('🐾 Shop Pet Care now!')">
+      <div class="slide-txt">
+        <div class="s-badge">🐾 Pet Care</div>
+        <div class="s-h1" id="bh0">Premium Pet Food — Trusted by 2M+ Owners!</div>
+        <div class="s-sub">Royal Canin, Drools, Pedigree & 500+ brands</div>
+        <button class="s-cta" id="bc0">Shop Now →</button>
+      </div>
+      <div class="b-art">🦴</div>
+    </div>
+    <div class="bslide bs1" onclick="showT('📱 Best Mobile Deals!')">
+      <div class="slide-txt">
+        <div class="s-badge">📱 Mobiles</div>
+        <div class="s-h1" id="bh1">iPhone 15 & Galaxy — Up to 30% OFF!</div>
+        <div class="s-sub">No-cost EMI · Exchange · 1 yr warranty</div>
+        <button class="s-cta" id="bc1">Grab Deal →</button>
+      </div>
+      <div class="b-art">📱</div>
+    </div>
+    <div class="bslide bs3" onclick="showT('👗 Fashion Sale!')">
+      <div class="slide-txt">
+        <div class="s-badge">👗 Fashion</div>
+        <div class="s-h1" id="bh2">Flat 60% OFF Top Fashion Brands!</div>
+        <div class="s-sub">Nike · Adidas · Zara · H&M · 1000+ styles</div>
+        <button class="s-cta" id="bc2">Shop Fashion →</button>
+      </div>
+      <div class="b-art">👗</div>
+    </div>
+    <div class="bslide bs4" onclick="openM('sellerM')">
+      <div class="slide-txt">
+        <div class="s-badge">🏪 Sell on VetMart</div>
+        <div class="s-h1" id="bh3">Start Selling — Reach 2M+ Buyers!</div>
+        <div class="s-sub">Free listing · Low commission · Instant payment</div>
+        <button class="s-cta" id="bc3">Start Selling →</button>
+      </div>
+      <div class="b-art">💰</div>
+    </div>
+  </div>
+  <div class="bdots" id="bdotsWrap">
+    <div class="bdot on"></div>
+    <div class="bdot"></div>
+    <div class="bdot"></div>
+    <div class="bdot"></div>
+  </div>
+</div>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="ti"><div class="ti-em">🚚</div><div class="ti-lbl">Free Delivery</div><div class="ti-sub">On ₹499+</div></div>
+  <div class="ti"><div class="ti-em">↩️</div><div class="ti-lbl">30-Day Return</div><div class="ti-sub">Hassle-free</div></div>
+  <div class="ti"><div class="ti-em">👨‍⚕️</div><div class="ti-lbl">Vet Certified</div><div class="ti-sub">Pet products</div></div>
+  <div class="ti"><div class="ti-em">🔒</div><div class="ti-lbl">Secure Pay</div><div class="ti-sub">SSL + PCI DSS</div></div>
+</div>
+
+<!-- RECENTLY VIEWED / CONTINUE SHOPPING -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl" id="rvTitle">Continue Shopping</div></div>
+    <div class="see-all" onclick="showT('Loading all...')">See all <span class="arrow-r">›</span></div>
+  </div>
+  <div class="h-scroll" id="rvRow"></div>
+</div>
+
+<!-- FEATURED BRANDS — Amazon style 2-col -->
+<div class="sec" style="padding:14px">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl" id="featBrTitle">Featured Brands</div><div class="sec-sub" id="featBrSub">Deals up to 70% off</div></div>
+    <div class="see-all" onclick="showT('All brands...')">See all <span class="arrow-r">›</span></div>
+  </div>
+  <div class="brand-grid" style="padding:0;background:transparent;margin-bottom:0" id="brandGridEl"></div>
+</div>
+
+<!-- BEST SELLERS — Amazon 2-col grid -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl" id="bsTitle">🔥 Best Sellers</div><div class="sec-sub" id="bsSub">Most bought this week</div></div>
+    <div class="see-all" onclick="showT('Loading all products...')">See all <span class="arrow-r">›</span></div>
+  </div>
+  <div class="prod-grid" id="prodGrid"></div>
+</div>
+
+<!-- SHOP BY 18 CATEGORIES — 3-col -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl" id="cat18Title">Shop by Category</div><div class="sec-sub">18 categories · 25,000+ products</div></div>
+  </div>
+  <div class="cat18-grid" id="cat18Grid"></div>
+</div>
+
+<!-- QUICK DEALS -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl">⚡ Today's Deals</div><div class="sec-sub">Limited time · Low stock</div></div>
+    <div class="see-all" onclick="showT('Loading deals...')">See all <span class="arrow-r">›</span></div>
+  </div>
+  <div id="quickDeals"></div>
+</div>
+
+<!-- CUSTOMER REVIEWS -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl" id="revTitle">⭐ Customer Reviews</div><div class="sec-sub">4.8/5 · 1,24,000+ verified</div></div>
+    <div class="see-all">All <span class="arrow-r">›</span></div>
+  </div>
+  <div class="h-scroll" id="reviewsRow"></div>
+  <!-- Write review form -->
+  <div class="write-rev" id="writeRevForm">
+    <div class="wr-ttl">✍️ Write a Review</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:7px">Your rating:</div>
+    <div class="star-pick" id="starPick">
+      <button class="sp-btn" onclick="setRating(1)">⭐</button>
+      <button class="sp-btn" onclick="setRating(2)">⭐</button>
+      <button class="sp-btn" onclick="setRating(3)">⭐</button>
+      <button class="sp-btn" onclick="setRating(4)">⭐</button>
+      <button class="sp-btn" onclick="setRating(5)">⭐</button>
+    </div>
+    <textarea class="wr-inp" id="wr-inp" placeholder="Share your experience with this product..."></textarea>
+    <div class="wr-row">
+      <input class="wr-nm" id="wr-nm" placeholder="Your name">
+      <button class="wr-sub" onclick="submitRev()">Post ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STILL LOOKING -->
+<div class="sec">
+  <div class="sec-hdr"><div><div class="sec-ttl" id="slTitle">Still Looking For?</div></div></div>
+  <div class="still-grid" id="stillGrid"></div>
+</div>
+
+<!-- IMPORT TOOL -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl">🔗 Import Any Product</div><div class="sec-sub">Amazon, Flipkart, Chewy & more</div></div>
+  </div>
+  <div class="import-box">
+    <div class="imp-desc">Paste any product URL from <strong>Amazon, Flipkart, Chewy, Petco, Nykaa</strong> to instantly list it on your VetMart store!</div>
+    <input class="imp-inp" id="impUrl" placeholder="https://amazon.in/dp/..." oninput="handleImport(this.value)">
+    <div class="imp-prev" id="impPrev">
+      <div class="imp-em" id="impEm">📦</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:700;color:var(--ink)" id="impNm">Product Name</div>
+        <div style="font-size:15px;font-weight:900;color:var(--red);margin-top:3px" id="impPr">₹999</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:2px" id="impSrc">Source: Amazon India</div>
+        <button class="imp-add" onclick="importProd()">✅ Add to My VetMart Store</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SELL CTA -->
+<div class="sec">
+  <div class="sell-hero">
+    <div style="font-size:36px">🏪</div>
+    <h3>Sell on VetMart</h3>
+    <p>Join 50,000+ sellers. Reach 2M+ customers across India & 50 countries. Start FREE!</p>
+    <div class="sell-stat-row">
+      <div class="ss-item"><div class="ss-num">₹0</div><div class="ss-lbl">Listing Fee</div></div>
+      <div class="ss-item"><div class="ss-num">5%</div><div class="ss-lbl">Commission</div></div>
+      <div class="ss-item"><div class="ss-num">T+2</div><div class="ss-lbl">Payment</div></div>
+      <div class="ss-item"><div class="ss-num">2M+</div><div class="ss-lbl">Buyers</div></div>
+    </div>
+  </div>
+  <button class="fbtn amazon-yel" onclick="openM('sellerM')">🚀 Start Selling Now — FREE!</button>
+</div>
+
+<!-- PAYMENTS -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div><div class="sec-ttl">💳 Secure Payments</div><div class="sec-sub">6 gateways · All currencies · PCI-DSS</div></div>
+  </div>
+  <div class="pay-cards">
+    <div class="pay-c on" onclick="selPay(this)"><div class="pay-em">🇮🇳</div><div class="pay-nm">UPI & QR</div><div class="pay-ds">Instant · Free</div></div>
+    <div class="pay-c" onclick="selPay(this)"><div class="pay-em">💳</div><div class="pay-nm">Stripe</div><div class="pay-ds">Global cards</div></div>
+    <div class="pay-c" onclick="selPay(this)"><div class="pay-em">🅿️</div><div class="pay-nm">PayPal</div><div class="pay-ds">190+ countries</div></div>
+    <div class="pay-c" onclick="selPay(this)"><div class="pay-em">🇮🇳</div><div class="pay-nm">PayU India</div><div class="pay-ds">EMI · Cards</div></div>
+    <div class="pay-c" onclick="selPay(this)"><div class="pay-em">🇦🇪</div><div class="pay-nm">PayTabs</div><div class="pay-ds">MENA · AED</div></div>
+    <div class="pay-c" onclick="selPay(this)"><div class="pay-em">🔵</div><div class="pay-nm">Telr</div><div class="pay-ds">UAE · Kuwait</div></div>
+  </div>
+  <div class="method-chips">
+    <span class="mchip">UPI</span><span class="mchip">Visa</span><span class="mchip">Mastercard</span>
+    <span class="mchip">RuPay</span><span class="mchip">Net Banking</span><span class="mchip">EMI</span>
+    <span class="mchip">BNPL</span><span class="mchip">Wallet</span><span class="mchip">COD</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ftr-strip">
+  <div class="ftr-links">
+    <div class="ftr-link" onclick="openM('aboutM')"><span class="fl-em">🏢</span>About VetMart</div>
+    <div class="ftr-link" onclick="openM('suppM')"><span class="fl-em">🆘</span>Help & Support</div>
+    <div class="ftr-link" onclick="openM('sellerM')"><span class="fl-em">🏪</span>Sell on VetMart</div>
+    <div class="ftr-link" onclick="openM('tcM')"><span class="fl-em">📜</span>Terms</div>
+    <div class="ftr-link" onclick="openM('privM')"><span class="fl-em">🔐</span>Privacy Policy</div>
+    <div class="ftr-link" onclick="openM('refundM')"><span class="fl-em">↩️</span>Refund Policy</div>
+    <div class="ftr-link" onclick="openM('trkM')"><span class="fl-em">📦</span>Track Order</div>
+    <div class="ftr-link" onclick="openM('adminM')"><span class="fl-em">🎛️</span>Admin Panel</div>
+  </div>
+  <div class="ftr-copy">
+    <span>VetMart Technologies Pvt. Ltd.</span><br>
+    A-42 Sector 63, Noida UP 201301 · hello@vetmart.in<br>
+    © 2025 VetMart · All Rights Reserved · <span>FSSAI · GST · Drug License · DPIIT</span><br>
+    India's #1 Marketplace · 2M+ Customers · 50K+ Sellers · 50+ Countries
+  </div>
+</div>
+
+<!-- BOTTOM NAV — Amazon style -->
+<nav class="bot-nav">
+  <div class="ni on" onclick="setNav(this)"><div class="ni-em">🏠</div><div class="ni-lbl" id="n0">Home</div></div>
+  <div class="ni" onclick="setNav(this);showT('🔍 Explore all categories')"><div class="ni-em">🔍</div><div class="ni-lbl" id="n1">Explore</div></div>
+  <div class="ni" onclick="setNav(this);openM('sellerM')"><div class="ni-em">🏪</div><div class="ni-lbl" id="n2">Sell</div></div>
+  <div class="ni" onclick="setNav(this);openM('authM')"><div class="ni-em">👤</div><div class="ni-lbl" id="n3">You</div></div>
+  <div class="ni" onclick="setNav(this);openM('cartM');renderCart()" style="position:relative">
+    <div class="ni-em">🛒</div><div class="ni-lbl" id="n4">Cart</div>
+    <span class="ni-cnt-bdg" id="navBdg">0</span>
+  </div>
+</nav>
+
+<!-- FAB -->
+<button class="fab" onclick="openM('sellerM')">🏪 Sell FREE</button>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ════════════ ALL MODALS ════════════ -->
+
+<!-- PRODUCT DETAIL -->
+<div class="overlay" id="pdM" onclick="if(event.target.id==='pdM')closeM('pdM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl" id="pdTtl">Product Details</span><button class="modal-x" onclick="closeM('pdM')">✕</button></div>
+    <div class="mbody" id="pdBody"></div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="overlay" id="cartM" onclick="if(event.target.id==='cartM')closeM('cartM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">🛒 My Cart</span><button class="modal-x" onclick="closeM('cartM')">✕</button></div>
+    <div class="mbody" id="cartBody"></div>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div class="overlay" id="authM" onclick="if(event.target.id==='authM')closeM('authM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl" id="authTtl">Welcome to VetMart</span><button class="modal-x" onclick="closeM('authM')">✕</button></div>
+    <div class="mbody">
+      <div class="auth-tabs">
+        <div class="atab on" onclick="swAuth(this,'lg')">Sign In</div>
+        <div class="atab" onclick="swAuth(this,'sg')">Sign Up</div>
+      </div>
+      <div id="lgF">
+        <div class="fg"><label id="lbPh">📱 Phone / Email</label><input class="finp" placeholder="+91 XXXXX XXXXX or email@domain.com"></div>
+        <div class="fg"><label id="lbPw">🔒 Password</label><input class="finp" type="password" placeholder="Enter password"></div>
+        <button class="fbtn amazon-yel" onclick="showT('✅ Signed in! Welcome back.');closeM('authM')" id="lgBtn">Sign In →</button>
+        <div class="div-or">or</div>
+        <div class="soc-btns">
+          <button class="soc-b" onclick="showT('📱 OTP sent!')">📱 Phone OTP</button>
+          <button class="soc-b" onclick="showT('🔵 Google Sign-In...')">🔵 Google</button>
+        </div>
+      </div>
+      <div id="sgF" style="display:none">
+        <div class="fg"><label id="sgNm">👤 Full Name</label><input class="finp" placeholder="Your full name"></div>
+        <div class="fg"><label id="sgEm">📧 Email</label><input class="finp" placeholder="you@email.com"></div>
+        <div class="fg"><label id="sgPh">📱 Mobile</label><input class="finp" placeholder="+91 XXXXX XXXXX"></div>
+        <div class="fg"><label id="sgOtp">🔢 OTP</label>
+          <div class="otp-boxes"><input class="otp-i" maxlength="1"><input class="otp-i" maxlength="1"><input class="otp-i" maxlength="1"><input class="otp-i" maxlength="1"><input class="otp-i" maxlength="1"><input class="otp-i" maxlength="1"></div>
+        </div>
+        <button class="fbtn amazon-yel" id="sgBtn" onclick="showT('🎉 Account created! Welcome to VetMart!');closeM('authM')">Create Account →</button>
+      </div>
+      <div style="display:flex;justify-content:center;gap:20px;padding:13px 0 0;border-top:1px solid var(--bd);margin-top:14px;flex-wrap:wrap">
+        <div style="text-align:center;font-size:9px;color:var(--muted)"><span style="font-size:17px;display:block;margin-bottom:3px">🔒</span>SSL Secure</div>
+        <div style="text-align:center;font-size:9px;color:var(--muted)"><span style="font-size:17px;display:block;margin-bottom:3px">🛡️</span>Privacy Safe</div>
+        <div style="text-align:center;font-size:9px;color:var(--muted)"><span style="font-size:17px;display:block;margin-bottom:3px">✅</span>Verified</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SELLER PORTAL -->
+<div class="overlay" id="sellerM" onclick="if(event.target.id==='sellerM')closeM('sellerM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">🏪 Seller Portal</span><button class="modal-x" onclick="closeM('sellerM')">✕</button></div>
+    <div class="mbody">
+      <div class="sell-hero">
+        <div style="font-size:36px">🚀</div>
+        <h3>Start Selling on VetMart</h3>
+        <p>Free to list · Low commission · Instant payments · 2M+ buyers ready to shop</p>
+        <div class="sell-stat-row">
+          <div class="ss-item"><div class="ss-num">₹0</div><div class="ss-lbl">Listing Fee</div></div>
+          <div class="ss-item"><div class="ss-num">5-12%</div><div class="ss-lbl">Commission</div></div>
+          <div class="ss-item"><div class="ss-num">T+2</div><div class="ss-lbl">Payment</div></div>
+          <div class="ss-item"><div class="ss-num">24/7</div><div class="ss-lbl">Support</div></div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:10px">How to Start:</div>
+      <div class="sell-step"><div class="ss-num2">1</div><div><div class="ss-ttl">Register & Verify</div><div class="ss-sub">GST, PAN card, bank account. 10 minutes.</div></div></div>
+      <div class="sell-step"><div class="ss-num2">2</div><div><div class="ss-ttl">List Your Products</div><div class="ss-sub">Upload photos, add title in EN/हिन्दी/عربي, set price & stock.</div></div></div>
+      <div class="sell-step"><div class="ss-num2">3</div><div><div class="ss-ttl">Get Orders & Ship</div><div class="ss-sub">VetMart handles payments. Pack & ship. Payment in T+2 days.</div></div></div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin:14px 0 10px">📦 List a New Product</div>
+      <div style="background:var(--bg);border-radius:8px;padding:13px;margin-bottom:12px;border:1px solid var(--bd)">
+        <div style="font-size:11px;font-weight:800;color:var(--vm-green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">📝 Product Info</div>
+        <div class="fg"><label>Title (English) *</label><input class="finp" id="pTitleEn" placeholder="e.g. Royal Canin Adult Dog Food 3kg"></div>
+        <div class="fg"><label>शीर्षक (Hindi)</label><input class="finp" id="pTitleHi" placeholder="जैसे: रॉयल कैनिन डॉग फूड 3kg" style="font-family:var(--fn-hi)"></div>
+        <div class="fg"><label>العنوان (Arabic)</label><input class="finp" id="pTitleAr" placeholder="مثلاً: طعام الكلاب 3 كجم" style="font-family:var(--fn-ar);direction:rtl;text-align:right"></div>
+        <div class="form-row">
+          <div class="fg"><label>Category</label>
+            <select class="fsel" id="pCat">
+              <option>Pet Food</option><option>Medicines</option><option>Fashion</option>
+              <option>Mobiles</option><option>Electronics</option><option>Beauty</option>
+              <option>Gaming</option><option>Toys</option><option>Books</option>
+              <option>Sports</option><option>Tools</option><option>Home Care</option>
+              <option>Baby</option><option>Appliances</option><option>Computers</option>
+              <option>Daily Needs</option><option>Bazaar</option><option>Outlet</option>
+            </select>
+          </div>
+          <div class="fg"><label>Brand</label><input class="finp" id="pBrand" placeholder="Brand name"></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Price (₹) *</label><input class="finp" id="pPrice" type="number" placeholder="999"></div>
+          <div class="fg"><label>MRP (₹)</label><input class="finp" id="pMrp" type="number" placeholder="1499"></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Stock Qty</label><input class="finp" id="pStock" type="number" placeholder="100"></div>
+          <div class="fg"><label>Emoji/Icon</label><input class="finp" id="pEmoji" placeholder="📦"></div>
+        </div>
+        <div class="fg"><label>Description (English)</label><textarea class="ftarea" id="pDescEn" placeholder="Detailed product description..."></textarea></div>
+        <div class="fg"><label>विवरण (Hindi)</label><textarea class="ftarea" id="pDescHi" placeholder="उत्पाद का विवरण..." style="font-family:var(--fn-hi)"></textarea></div>
+        <div class="fg"><label>الوصف (Arabic)</label><textarea class="ftarea" id="pDescAr" placeholder="وصف المنتج..." style="font-family:var(--fn-ar);direction:rtl;text-align:right"></textarea></div>
+      </div>
+      <button class="fbtn amazon-yel" onclick="listProduct()">🚀 List Product Now!</button>
+      <div style="height:8px"></div>
+      <button class="fbtn wht" onclick="showT('📋 Loading my listings...')">📋 View My Listings</button>
+      <div style="background:var(--bg);border-radius:8px;padding:12px;margin-top:13px;border:1px solid var(--bd)">
+        <div style="font-size:11px;font-weight:800;color:var(--ink);margin-bottom:5px">📞 Seller Support</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.8">📞 +91-11-4567-9001 · Mon–Sat 9AM–8PM<br>✉️ sellers@vetmart.in · 💚 WhatsApp: +91-9876-100-200</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS -->
+<div class="overlay" id="notifM" onclick="if(event.target.id==='notifM')closeM('notifM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">🔔 Notifications</span><button class="modal-x" onclick="closeM('notifM')">✕</button></div>
+    <div class="mbody">
+      <div class="notif-row" onclick="showT('⚡ Opening flash sale...');closeM('notifM')"><div class="ni-em-box">⚡</div><div><div class="ni-msg">Flash Sale — 70% OFF Sitewide!</div><div class="ni-sub2">Ends in 2 hrs · Code: VET40</div></div></div>
+      <div class="notif-row" onclick="openM('trkM');closeM('notifM')"><div class="ni-em-box">🚚</div><div><div class="ni-msg">Order out for delivery — by 8 PM</div><div class="ni-sub2">Royal Canin 3kg · #VM-2025-4421</div></div></div>
+      <div class="notif-row" onclick="showT('💎 Points credited!')"><div class="ni-em-box">💎</div><div><div class="ni-msg">₹150 VetMart Points credited!</div><div class="ni-sub2">On your last order · Expires 90 days</div></div></div>
+      <div class="notif-row" onclick="openM('sellerM');closeM('notifM')"><div class="ni-em-box">🏪</div><div><div class="ni-msg">New: List products FREE — Start today!</div><div class="ni-sub2">Join 50,000+ sellers on VetMart</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TRACK ORDER -->
+<div class="overlay" id="trkM" onclick="if(event.target.id==='trkM')closeM('trkM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">📦 Track Order</span><button class="modal-x" onclick="closeM('trkM')">✕</button></div>
+    <div class="mbody">
+      <div class="trk-ord-box">
+        <div style="font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:5px">ORDER #VM-2025-4421</div>
+        <div style="font-size:14px;font-weight:800;color:var(--ink);margin-bottom:3px">Royal Canin Adult Dog Food 3kg</div>
+        <div style="font-size:12px;color:var(--vm-green);font-weight:700;margin-bottom:5px">₹1,899 · Paid via UPI · ✅ Confirmed</div>
+        <div style="font-size:11px;color:var(--ink2);font-weight:600">Expected: Tomorrow by 8:00 PM · Free delivery</div>
+      </div>
+      <div class="step-row done"><div class="step-dot">✓</div><div class="step-info"><div class="step-ttl">Order Placed</div><div class="step-sub">Feb 18 · 11:30 AM</div></div></div>
+      <div class="step-row done"><div class="step-dot">✓</div><div class="step-info"><div class="step-ttl">Payment Confirmed</div><div class="step-sub">₹1,899 via UPI · 11:31 AM</div></div></div>
+      <div class="step-row done"><div class="step-dot">✓</div><div class="step-info"><div class="step-ttl">Packed & Dispatched</div><div class="step-sub">Feb 18 · 2:00 PM · VetMart Noida Hub</div></div></div>
+      <div class="step-row act"><div class="step-dot">🚚</div><div class="step-info"><div class="step-ttl">Out for Delivery</div><div class="step-sub">Feb 19 · 9:00 AM</div><div class="step-loc">🧑 Raj Kumar · +91 98765 43210 · 5.2 km away</div></div></div>
+      <div class="step-row"><div class="step-dot">🏠</div><div class="step-info"><div class="step-ttl">Delivered</div><div class="step-sub">Expected: Feb 19 by 8 PM</div></div></div>
+      <button style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;color:var(--ink);font-family:inherit" onclick="showT('📞 Calling Raj Kumar...')">📞 Contact Delivery Agent</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRIME -->
+<div class="overlay" id="primeM" onclick="if(event.target.id==='primeM')closeM('primeM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">⭐ VetMart Prime</span><button class="modal-x" onclick="closeM('primeM')">✕</button></div>
+    <div class="mbody">
+      <div style="background:linear-gradient(140deg,var(--vm-dark),var(--vm-mid),var(--vm-green));border-radius:12px;padding:20px;text-align:center;margin-bottom:16px">
+        <div style="font-size:40px">⭐</div>
+        <div style="font-size:20px;font-weight:900;color:#fff;margin-top:8px">VetMart Prime</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.78);margin-top:5px;line-height:1.6">Unlimited free delivery · Exclusive deals · Early access</div>
+        <div style="font-size:28px;font-weight:900;color:var(--or);margin-top:12px">₹299<span style="font-size:13px;font-weight:500;color:rgba(255,255,255,.7)">/year</span></div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:3px">= Just ₹25/month</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--bd)"><div style="font-size:22px">🚀</div><div style="font-size:11px;font-weight:700;margin-top:4px">Free Same-Day</div><div style="font-size:9px;color:var(--muted)">100+ cities</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--bd)"><div style="font-size:22px">🎁</div><div style="font-size:11px;font-weight:700;margin-top:4px">Exclusive Deals</div><div style="font-size:9px;color:var(--muted)">Members only</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--bd)"><div style="font-size:22px">⚡</div><div style="font-size:11px;font-weight:700;margin-top:4px">Early Sale Access</div><div style="font-size:9px;color:var(--muted)">24hr before all</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--bd)"><div style="font-size:22px">🎬</div><div style="font-size:11px;font-weight:700;margin-top:4px">VetMart Video</div><div style="font-size:9px;color:var(--muted)">Pet care content</div></div>
+      </div>
+      <button class="fbtn amazon-yel" onclick="showT('⭐ Prime activated! Welcome!');closeM('primeM')">⭐ Get Prime for ₹299/yr</button>
+      <div style="text-align:center;font-size:10px;color:var(--muted);margin-top:8px">Try free 30-day trial · Cancel anytime</div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="overlay" id="adminM" onclick="if(event.target.id==='adminM')closeM('adminM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">🎛️ Admin Dashboard</span><button class="modal-x" onclick="closeM('adminM')">✕</button></div>
+    <div class="mbody">
+      <div style="background:linear-gradient(140deg,var(--vm-dark),var(--vm-mid),var(--vm-green));padding:18px 16px;text-align:center;color:#fff;margin:-15px -15px 16px;border-radius:0">
+        <div style="font-size:30px">🏢</div>
+        <div style="font-size:16px;font-weight:900;margin-top:6px">VetMart Control Center</div>
+        <div style="font-size:10px;opacity:.7;margin-top:3px">Real-time business intelligence · Live data</div>
+      </div>
+      <div class="adm-grid">
+        <div class="adm-card"><div class="adm-em">📦</div><div class="adm-num">8,247</div><div class="adm-lbl">Total Orders</div><div class="adm-trend">↑ 22% this week</div></div>
+        <div class="adm-card"><div class="adm-em">💰</div><div class="adm-num">₹4.2L</div><div class="adm-lbl">Today Revenue</div><div class="adm-trend">↑ 18% vs yesterday</div></div>
+        <div class="adm-card"><div class="adm-em">👥</div><div class="adm-num">2M+</div><div class="adm-lbl">Customers</div><div class="adm-trend">↑ 8% this month</div></div>
+        <div class="adm-card"><div class="adm-em">🏪</div><div class="adm-num">50K+</div><div class="adm-lbl">Active Sellers</div><div class="adm-trend">+120 today</div></div>
+      </div>
+      <div style="font-size:12px;font-weight:800;margin-bottom:8px">📈 Revenue — This Week</div>
+      <div class="chart-bars">
+        <div class="cbar" style="height:55%"></div><div class="cbar" style="height:68%"></div>
+        <div class="cbar" style="height:72%"></div><div class="cbar" style="height:45%"></div>
+        <div class="cbar" style="height:88%"></div><div class="cbar hi" style="height:100%"></div>
+        <div class="cbar" style="height:62%"></div>
+      </div>
+      <div class="chart-labs">
+        <span class="clab">Mon</span><span class="clab">Tue</span><span class="clab">Wed</span>
+        <span class="clab">Thu</span><span class="clab">Fri</span><span class="clab hi">Sat</span><span class="clab">Sun</span>
+      </div>
+      <div style="font-size:12px;font-weight:800;margin:13px 0 8px">📦 Recent Orders</div>
+      <div class="ord-row" onclick="openM('trkM');closeM('adminM')"><div class="ord-em">🦴</div><div style="flex:1;min-width:0"><div class="ord-nm">Royal Canin Adult Dog Food 3kg</div><div class="ord-id">#VM-4421 · Noida</div><div class="os os-shp">Shipped</div></div><div style="font-size:13px;font-weight:800;color:var(--vm-green)">₹1,899</div></div>
+      <div class="ord-row"><div class="ord-em">📱</div><div style="flex:1;min-width:0"><div class="ord-nm">iPhone 15 128GB Midnight</div><div class="ord-id">#VM-4422 · Mumbai</div><div class="os os-del">Delivered</div></div><div style="font-size:13px;font-weight:800;color:var(--vm-green)">₹74,999</div></div>
+      <div class="ord-row"><div class="ord-em">👗</div><div style="flex:1;min-width:0"><div class="ord-nm">Nike Air Max 270 — Black/White</div><div class="ord-id">#VM-4423 · Dubai, UAE</div><div class="os os-pen">Processing</div></div><div style="font-size:13px;font-weight:800;color:var(--vm-green)">AED 280</div></div>
+      <button class="fbtn grn" style="margin-top:12px" onclick="showT('🎛️ Full dashboard coming...')">Open Full Dashboard →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TERMS -->
+<div class="overlay" id="tcM" onclick="if(event.target.id==='tcM')closeM('tcM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">📜 Terms & Conditions</span><button class="modal-x" onclick="closeM('tcM')">✕</button></div>
+    <div class="mbody">
+      <div style="background:linear-gradient(135deg,var(--vm-dark),var(--vm-green));border-radius:12px;padding:20px;text-align:center;margin-bottom:16px"><div style="font-size:36px">⚖️</div><div style="font-size:18px;font-weight:900;color:#fff;margin:7px 0 5px">Terms & Conditions</div><div style="font-size:11px;color:rgba(255,255,255,.72)">Last Updated: Feb 22, 2025</div></div>
+      <div style="border-inline-start:3px solid var(--vm-green);padding-inline-start:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--bd)"><div style="font-size:9px;font-weight:800;background:var(--vm-green);color:#fff;display:inline-block;padding:2px 8px;border-radius:12px;margin-bottom:5px">01</div><div style="font-size:14px;font-weight:800;margin-bottom:6px;color:var(--ink)">Acceptance</div><div style="font-size:12px;color:var(--muted);line-height:1.8">By using VetMart, you agree to these terms. Must be 18+ or have parental consent. Consumer Protection Act 2019 applies.</div></div>
+      <div style="border-inline-start:3px solid var(--vm-green);padding-inline-start:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--bd)"><div style="font-size:9px;font-weight:800;background:var(--vm-green);color:#fff;display:inline-block;padding:2px 8px;border-radius:12px;margin-bottom:5px">02</div><div style="font-size:14px;font-weight:800;margin-bottom:6px;color:var(--ink)">Seller Terms</div><div style="font-size:12px;color:var(--muted);line-height:1.8">GST registration required. Commission: 5–18% by category. Counterfeit = immediate ban. Payment T+2 days.</div></div>
+      <div style="border-inline-start:3px solid var(--vm-green);padding-inline-start:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--bd)"><div style="font-size:9px;font-weight:800;background:var(--vm-green);color:#fff;display:inline-block;padding:2px 8px;border-radius:12px;margin-bottom:5px">03</div><div style="font-size:14px;font-weight:800;margin-bottom:6px;color:var(--ink)">Returns & Refunds</div><div style="font-size:12px;color:var(--muted);line-height:1.8">30-day returns. Medicines: 7-day sealed only. Refund in 5–7 business days or instant to VetMart Wallet.</div></div>
+      <button class="fbtn amazon-yel" onclick="showT('✅ Terms accepted!');closeM('tcM')">I Accept ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY -->
+<div class="overlay" id="privM" onclick="if(event.target.id==='privM')closeM('privM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">🔐 Privacy Policy</span><button class="modal-x" onclick="closeM('privM')">✕</button></div>
+    <div class="mbody">
+      <div style="background:linear-gradient(135deg,#1a0a3d,#4c1d95);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px"><div style="font-size:36px">🔐</div><div style="font-size:18px;font-weight:900;color:#fff;margin:7px 0 5px">Privacy Policy</div><div style="font-size:11px;color:rgba(255,255,255,.7)">GDPR · IT Act 2000 Compliant</div></div>
+      <div style="border-inline-start:3px solid var(--vm-green);padding-inline-start:12px;margin-bottom:14px"><div style="font-size:12px;color:var(--muted);line-height:1.8"><strong style="color:var(--ink)">Data Collected:</strong> Name, email, phone, address, browse history, device info, location (with consent).<br><br><strong style="color:var(--ink)">Your Rights:</strong> Access, correct, delete your data. Opt-out of marketing anytime. Account deletion within 30 days.<br><br><strong style="color:var(--ink)">Security:</strong> AES-256 encryption · TLS 1.3 · AWS KMS · ISO 27001. Zero data selling — ever.</div></div>
+      <button class="fbtn grn" onclick="showT('✅ Privacy understood.');closeM('privM')">Understood ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- REFUND -->
+<div class="overlay" id="refundM" onclick="if(event.target.id==='refundM')closeM('refundM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">↩️ Refund Policy</span><button class="modal-x" onclick="closeM('refundM')">✕</button></div>
+    <div class="mbody">
+      <div style="background:linear-gradient(135deg,#3b0000,#991b1b);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px"><div style="font-size:36px">↩️</div><div style="font-size:18px;font-weight:900;color:#fff;margin:7px 0 5px">30-Day Return Guarantee</div><div style="font-size:11px;color:rgba(255,255,255,.7)">No questions asked</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+        <div style="background:var(--bg);border-radius:8px;padding:11px;text-align:center;border:1px solid var(--bd)"><div style="font-size:22px">🍖</div><div style="font-size:11px;font-weight:800;margin-top:3px">Pet Food</div><div style="font-size:10px;color:var(--vm-green);font-weight:700">30 Days</div></div>
+        <div style="background:#fef3c7;border-radius:8px;padding:11px;text-align:center;border:1px solid #fde68a"><div style="font-size:22px">💊</div><div style="font-size:11px;font-weight:800;margin-top:3px">Medicines</div><div style="font-size:10px;color:#92400e;font-weight:700">7 Days</div></div>
+        <div style="background:#dbeafe;border-radius:8px;padding:11px;text-align:center;border:1px solid #bfdbfe"><div style="font-size:22px">📱</div><div style="font-size:11px;font-weight:800;margin-top:3px">Electronics</div><div style="font-size:10px;color:var(--blue);font-weight:700">10 Days</div></div>
+        <div style="background:#fce7f3;border-radius:8px;padding:11px;text-align:center;border:1px solid #fbcfe8"><div style="font-size:22px">👗</div><div style="font-size:11px;font-weight:800;margin-top:3px">Fashion</div><div style="font-size:10px;color:#9d174d;font-weight:700">30 Days</div></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8;border-inline-start:3px solid var(--vm-green);padding-inline-start:11px">Refund Timeline: Request → Instant · Pickup → 24hrs · Refund → 5–7 business days · VetMart Wallet → Instant</div>
+      <button class="fbtn amazon-yel" style="margin-top:14px" onclick="showT('🔄 Return request initiated!');closeM('refundM')">Start a Return →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="overlay" id="aboutM" onclick="if(event.target.id==='aboutM')closeM('aboutM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">🏢 About VetMart</span><button class="modal-x" onclick="closeM('aboutM')">✕</button></div>
+    <div class="mbody">
+      <div style="background:linear-gradient(140deg,var(--vm-dark),var(--vm-green));border-radius:12px;padding:20px;text-align:center;margin-bottom:16px">
+        <div style="font-size:32px;font-weight:900;color:var(--or);font-style:italic;font-family:var(--fn)">Vet·Mart</div>
+        <div style="font-size:18px;font-weight:900;color:#fff;margin:7px 0 5px">India's #1 Marketplace</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.72)">Since 2020 · 50+ Countries · Vet-certified</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+        <div style="background:var(--vm-pale);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--vm-mint)"><div style="font-size:22px;font-weight:900;color:var(--vm-green)">2M+</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Happy Customers</div></div>
+        <div style="background:var(--vm-pale);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--vm-mint)"><div style="font-size:22px;font-weight:900;color:var(--vm-green)">50K+</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Active Sellers</div></div>
+        <div style="background:var(--vm-pale);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--vm-mint)"><div style="font-size:22px;font-weight:900;color:var(--vm-green)">25K+</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Products Listed</div></div>
+        <div style="background:var(--vm-pale);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--vm-mint)"><div style="font-size:22px;font-weight:900;color:var(--vm-green)">50+</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Countries</div></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.85;border-inline-start:3px solid var(--vm-green);padding-inline-start:11px;margin-bottom:14px">VetMart was born in 2020 when Dr. Arjun Sharma — a practicing vet in Delhi — couldn't find genuine pet medicines online. He partnered with Rahul Verma to build India's first vet-certified marketplace. Today we serve <strong style="color:var(--ink)">2M+ pet owners</strong> across <strong style="color:var(--ink)">50+ countries</strong> with 25,000+ products from 50,000+ sellers.</div>
+      <div style="background:var(--vm-dark);border-radius:10px;padding:14px;text-align:center;color:#fff">
+        <div style="font-size:12px;font-weight:800;margin-bottom:7px">📬 Contact VetMart</div>
+        <div style="font-size:11px;opacity:.8;line-height:2">🌐 vetmart.in · ✉️ hello@vetmart.in<br>📞 +91-11-4567-9000 · Mon–Sat 9AM–8PM IST</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORT -->
+<div class="overlay" id="suppM" onclick="if(event.target.id==='suppM')closeM('suppM')">
+  <div class="modal"><div class="m-handle"></div>
+    <div class="modal-head"><span class="modal-ttl">🆘 Help Center</span><button class="modal-x" onclick="closeM('suppM')">✕</button></div>
+    <div class="mbody">
+      <div style="background:linear-gradient(135deg,#020818,var(--blue));border-radius:12px;padding:18px;text-align:center;margin-bottom:16px"><div style="font-size:34px">💬</div><div style="font-size:17px;font-weight:900;color:#fff;margin:7px 0 5px">How can we help?</div><div style="font-size:11px;color:rgba(255,255,255,.72)">24/7 · EN/हि/عر · Avg 3 min response</div></div>
+      <div class="supp-cat-grid">
+        <div class="supp-cat" onclick="showT('📦 Orders help')"><div class="sc-em">📦</div><div class="sc-ttl">Orders</div><div class="sc-sub">Track, cancel, return</div></div>
+        <div class="supp-cat" onclick="showT('💳 Payments help')"><div class="sc-em">💳</div><div class="sc-ttl">Payments</div><div class="sc-sub">Refunds, failures</div></div>
+        <div class="supp-cat" onclick="showT('🚚 Delivery help')"><div class="sc-em">🚚</div><div class="sc-ttl">Delivery</div><div class="sc-sub">Shipping, delays</div></div>
+        <div class="supp-cat" onclick="openM('sellerM');closeM('suppM')"><div class="sc-em">🏪</div><div class="sc-ttl">Sellers</div><div class="sc-sub">List & manage</div></div>
+      </div>
+      <div class="faq-item"><div class="faq-q" onclick="togFAQ(this)">Is VetMart safe to buy from?<span class="fq-ic">+</span></div><div class="faq-ans"><p>Yes! All sellers verified. Zero counterfeit policy. Buyer Protection on every order. 4.8/5 from 1.24 lakh+ reviews.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="togFAQ(this)">How do I sell on VetMart?<span class="fq-ic">+</span></div><div class="faq-ans"><p>Tap "Sell" button. Register with GST & PAN. List products in 3 languages. Orders come to you. Payment in T+2 days!</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="togFAQ(this)">Does Arabic RTL work properly?<span class="fq-ic">+</span></div><div class="faq-ans"><p>Yes! Complete RTL layout when you select عربي. All navigation, buttons, product titles flip to right-to-left automatically.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="togFAQ(this)">Which currencies are supported?<span class="fq-ic">+</span></div><div class="faq-ans"><p>₹ INR for India, $ USD globally, AED for UAE/MENA. PayTabs & Telr for Arab markets. PayPal for international buyers.</p></div></div>
+      <div class="cnt-row" onclick="showT('💬 Opening live chat...')"><div class="cnt-em">💬</div><div><div class="cnt-ttl">Live Chat</div><div class="cnt-sub">24/7 · Under 3 min wait</div></div><span class="cnt-arr">›</span></div>
+      <div class="cnt-row" onclick="showT('📞 +91-11-4567-9000...')"><div class="cnt-em">📞</div><div><div class="cnt-ttl">Phone Support</div><div class="cnt-sub">+91-11-4567-9000 · 9AM–8PM</div></div><span class="cnt-arr">›</span></div>
+      <div class="cnt-row" onclick="showT('💚 Opening WhatsApp...')"><div class="cnt-em">💚</div><div><div class="cnt-ttl">WhatsApp</div><div class="cnt-sub">+91-9876-500-100 · 24/7</div></div><span class="cnt-arr">›</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ COMPLETE JS ENGINE ════════════ -->
+<script>
+'use strict';
+window.onerror=function(){return true;};
+
+// ── STATE ──
+var cart=[],wishlist=new Set(),userRating=0,userRevs=[];
+var lang='en',curr='INR',timerSec=9258,slideIdx=0;
+
+// ── PRODUCTS DB ──
+var PRODS=[
+  {id:1,brand:'Royal Canin',em:'🦴',en:'Royal Canin Adult Dog Food 3kg',hi:'रॉयल कैनिन एडल्ट डॉग फूड 3kg',ar:'رويال كانين طعام كلاب للبالغين 3كجم',descEn:'Nutritionally balanced dry food for adult dogs. Promotes healthy digestion & coat. Vet-recommended.',descHi:'वयस्क कुत्तों के लिए संतुलित आहार। स्वस्थ पाचन के लिए।',descAr:'طعام جاف متوازن للكلاب البالغة. معتمد من البيطريين.',INR:1899,MRP:2499,USD:22,AED:82,cat:'Pet Food',rat:4.8,revs:12847,badge:'HOT',del:'Free delivery',seller:'RoyalCanin Official'},
+  {id:2,brand:'Apple',em:'📱',en:'iPhone 15 128GB Midnight',hi:'आईफोन 15 128GB मिडनाइट',ar:'آيفون 15 128 جيجابايت',descEn:'A16 Bionic chip, 48MP camera, Dynamic Island, USB-C. All-day battery.',descHi:'A16 बायोनिक चिप, 48MP कैमरा, USB-C।',descAr:'شريحة A16 Bionic، كاميرا 48 ميجابكسل، USB-C.',INR:74999,MRP:89999,USD:899,AED:3300,cat:'Mobiles',rat:4.9,revs:45231,badge:'HOT',del:'Free same-day',seller:'Apple India'},
+  {id:3,brand:'Nike',em:'👟',en:'Nike Air Max 270 Running Shoes',hi:'नाइक एयर मैक्स 270 रनिंग शूज',ar:'نايك اير ماكس 270 للركض',descEn:'Max Air heel unit. Breathable mesh upper. 8 colors available.',descHi:'मैक्स एयर हील, सांस लेने योग्य जाल।',descAr:'وحدة Max Air للكعب. شبكة قابلة للتنفس.',INR:12999,MRP:17999,USD:156,AED:572,cat:'Fashion',rat:4.7,revs:8934,badge:'SALE',del:'Free delivery',seller:'Nike India'},
+  {id:4,brand:'Samsung',em:'📺',en:'Samsung 55" 4K QLED Smart TV',hi:'सैमसंग 55" 4K QLED स्मार्ट टीवी',ar:'سامسونج 55 بوصة تلفاز QLED 4K',descEn:'Quantum 4K processor, Dolby Atmos, Alexa built-in, 100Hz.',descHi:'क्वांटम 4K, डॉल्बी एटमोस, एलेक्सा, 100Hz।',descAr:'معالج 4K كمي، Dolby Atmos، أليكسا مدمجة.',INR:64999,MRP:85000,USD:780,AED:2860,cat:'Electronics',rat:4.6,revs:22410,badge:'SALE',del:'Free + install',seller:'Samsung India'},
+  {id:5,brand:'Drools',em:'🐾',en:'Drools Chicken & Egg Cat Food 3kg',hi:'ड्रूल्स चिकन कैट फूड 3kg',ar:'طعام قطط دجاج وبيض 3كجم',descEn:'Real chicken, high protein, Omega 3&6 for glossy coat.',descHi:'असली चिकन, उच्च प्रोटीन, ओमेगा 3 और 6।',descAr:'دجاج حقيقي، بروتين عالٍ، أوميغا 3 و6.',INR:649,MRP:899,USD:7.8,AED:28.6,cat:'Pet Food',rat:4.5,revs:7823,badge:'HOT',del:'Free delivery',seller:'Drools Official'},
+  {id:6,brand:'boAt',em:'🎧',en:'boAt Rockerz 550 Bluetooth Headphone',hi:'बोट रॉकर्ज 550 ब्लूटूथ हेडफोन',ar:'سماعة بلوتوث boAt Rockerz 550',descEn:'40mm drivers, 20hr battery, foldable. Crystal clear sound.',descHi:'40mm ड्राइवर, 20 घंटे बैटरी, फोल्डेबल।',descAr:'محركات 40 مم، 20 ساعة، قابل للطي.',INR:1499,MRP:3999,USD:18,AED:66,cat:'Electronics',rat:4.3,revs:34521,badge:'HOT',del:'Free delivery',seller:'boAt Lifestyle'},
+  {id:7,brand:'Lakme',em:'💄',en:'Lakme Absolute Matte Lipstick',hi:'लैक्मे एब्सोल्यूट मैट लिपस्टिक',ar:'أحمر شفاه لاكميه',descEn:'Long-lasting matte, 12hr, Vitamin E, 24 shades.',descHi:'12 घंटे मैट, विटामिन E, 24 शेड्स।',descAr:'12 ساعة مطفأة، فيتامين E، 24 درجة.',INR:349,MRP:599,USD:4.2,AED:15.4,cat:'Beauty',rat:4.4,revs:19837,badge:'NEW',del:'₹29 delivery',seller:'Lakme Official'},
+  {id:8,brand:'Sony',em:'🎮',en:'PlayStation 5 Gaming Console',hi:'PlayStation 5 गेमिंग कंसोल',ar:'جهاز ألعاب PlayStation 5',descEn:'Ultra-high SSD, 4K HDR, DualSense haptics, 825GB.',descHi:'4K HDR, DualSense हैप्टिक, 825GB।',descAr:'SSD فائق السرعة، 4K HDR، DualSense.',INR:54990,MRP:59990,USD:660,AED:2420,cat:'Gaming',rat:4.9,revs:62849,badge:'HOT',del:'Free same-day',seller:'Sony India'},
+  {id:9,brand:'Frontline',em:'💊',en:'Frontline Plus Anti-Tick Spot-On',hi:'फ्रंटलाइन प्लस एंटी-टिक स्पॉट-ऑन',ar:'فرونتلاين بلس ضد القراد',descEn:'Kills ticks, fleas. 1 month protection. Waterproof.',descHi:'टिक, पिस्सू। 1 महीने की सुरक्षा।',descAr:'يقتل القراد والبراغيث. حماية شهر.',INR:449,MRP:599,USD:5.4,AED:19.8,cat:'Medicines',rat:4.7,revs:5612,badge:'VET',del:'Free delivery',seller:'Frontline India'},
+  {id:10,brand:'LEGO',em:'🧸',en:'LEGO Technic Bugatti Chiron 42083',hi:'LEGO टेक्निक बुगाटी चिरोन',ar:'ليغو تيكنيك بوغاتي شيرون',descEn:'3599 pieces. 8-speed gearbox. Ages 16+.',descHi:'3599 टुकड़े। 8-स्पीड गियरबॉक्स।',descAr:'3599 قطعة. ناقل 8 سرعات.',INR:32999,MRP:42000,USD:396,AED:1452,cat:'Toys',rat:4.9,revs:3847,badge:'NEW',del:'Free delivery',seller:'LEGO India'}
+];
+
+var BRANDS=[
+  {bg:'linear-gradient(135deg,#14532d,#22c55e)',em:'🐾',off:'Up to 50% off',nm:'Pet Care',sub:'ROYAL CANIN · DROOLS · HILLS'},
+  {bg:'linear-gradient(135deg,#1e3a5f,#2563eb)',em:'📱',off:'Up to 30% off',nm:'Mobiles',sub:'APPLE · SAMSUNG · ONEPLUS'},
+  {bg:'linear-gradient(135deg,#7f1d1d,#dc2626)',em:'👟',off:'Flat 60% off',nm:'Fashion',sub:'NIKE · ADIDAS · ZARA · H&M'},
+  {bg:'linear-gradient(135deg,#0c1a3d,#4f46e5)',em:'🎮',off:'Up to 25% off',nm:'Gaming',sub:'SONY · XBOX · RAZER'}
+];
+
+var QDEALS=[
+  {em:'🦷',nm:'Petsmile Whitening Dog Toothpaste',sub:'Enzymatic · 2.5oz · Vet-approved',INR:799,USD:9.6,AED:35,off:'47% OFF'},
+  {em:'📚',nm:'Harry Potter Complete Box Set',sub:'Hardcover · All 7 books · Bloomsbury',INR:3299,USD:39.6,AED:145,off:'34% OFF'},
+  {em:'⚽',nm:'Nivia Storm Football — Size 5',sub:'Match quality · All surfaces',INR:699,USD:8.4,AED:30.8,off:'53% OFF'},
+  {em:'🔧',nm:'Bosch Screwdriver 24-piece Set',sub:'Professional grade · With carrying case',INR:1299,USD:15.6,AED:57,off:'40% OFF'}
+];
+
+var STILL=[
+  {em:'🐠',nm:'Fish & Aquarium'},{em:'🦜',nm:'Bird Supplies'},{em:'🐹',nm:'Small Pets'},
+  {em:'🧴',nm:'Grooming'},{em:'🎽',nm:'Pet Clothing'},{em:'📖',nm:'Books'},
+  {em:'🏥',nm:'Vet Consult'},{em:'🚗',nm:'Car Accessories'},{em:'🏠',nm:'Home Decor'}
+];
+
+var REVS=[
+  {av:'👨',nm:'Ravi Sharma',dt:'Noida · 2 days ago',stars:5,txt:'Amazing quality! Royal Canin delivered in 4 hours. VetMart is now my go-to app!',prod:'Royal Canin 3kg',ver:true},
+  {av:'👩',nm:'Priya Malhotra',dt:'Mumbai · 4 days ago',stars:5,txt:'Ordered iPhone 15 — came sealed, original, next day delivery. Better price than Flipkart!',prod:'iPhone 15 128GB',ver:true},
+  {av:'🧔',nm:'Mohammed Al-Hassan',dt:'Dubai · 1 week ago',stars:4,txt:'Arabic RTL interface is perfect! Delivery to Dubai in 12 days. Great experience!',prod:'PlayStation 5',ver:true},
+  {av:'👩‍🦱',nm:'Anjali Singh',dt:'Delhi · 5 days ago',stars:5,txt:'Nike shoes at 60% off! Genuine product. Perfect packaging. Will order again!',prod:'Nike Air Max 270',ver:true}
+];
+
+var CAT18_DATA=[
+  {em:'⭐',nm:{en:'Prime',hi:'प्राइम',ar:'برايم'},bg:'ci-prime'},
+  {em:'👗',nm:{en:'Fashion',hi:'फैशन',ar:'أزياء'},bg:'ci-fashion'},
+  {em:'🔥',nm:{en:'Deals',hi:'डील्स',ar:'عروض'},bg:'ci-deals'},
+  {em:'💳',nm:{en:'Credit Card',hi:'क्रेडिट कार्ड',ar:'بطاقة ائتمان'},bg:'ci-credit'},
+  {em:'🛒',nm:{en:'Bazaar',hi:'बाजार',ar:'بازار'},bg:'ci-bazaar'},
+  {em:'🥦',nm:{en:'Daily Needs',hi:'दैनिक जरूरतें',ar:'احتياجات يومية'},bg:'ci-daily'},
+  {em:'📱',nm:{en:'Mobiles',hi:'मोबाइल',ar:'جوالات'},bg:'ci-mobile'},
+  {em:'💻',nm:{en:'Electronics',hi:'इलेक्ट्रॉनिक्स',ar:'إلكترونيات'},bg:'ci-elec'},
+  {em:'💄',nm:{en:'Beauty',hi:'ब्यूटी',ar:'جمال'},bg:'ci-beauty'},
+  {em:'🏷️',nm:{en:'Outlet',hi:'आउटलेट',ar:'منفذ'},bg:'ci-outlet'},
+  {em:'🖥️',nm:{en:'Computers',hi:'कंप्यूटर',ar:'حواسيب'},bg:'ci-comp'},
+  {em:'🎮',nm:{en:'Gaming',hi:'गेमिंग',ar:'ألعاب'},bg:'ci-gaming'},
+  {em:'🧸',nm:{en:'Toys',hi:'खिलौने',ar:'ألعاب أطفال'},bg:'ci-toys'},
+  {em:'📚',nm:{en:'Books',hi:'किताबें',ar:'كتب'},bg:'ci-books'},
+  {em:'⚽',nm:{en:'Sports',hi:'खेल',ar:'رياضة'},bg:'ci-sports'},
+  {em:'🔧',nm:{en:'Tools',hi:'उपकरण',ar:'أدوات'},bg:'ci-tools'},
+  {em:'🏠',nm:{en:'Home Care',hi:'होम केयर',ar:'العناية بالمنزل'},bg:'ci-home'},
+  {em:'👶',nm:{en:'Baby',hi:'बेबी',ar:'أطفال'},bg:'ci-baby'},
+  {em:'🍳',nm:{en:'Appliances',hi:'उपकरण',ar:'أجهزة'},bg:'ci-app'},
+  {em:'🐾',nm:{en:'Pet Care',hi:'पेट केयर',ar:'رعاية الحيوانات'},bg:'ci-pet'}
+];
+
+// TRANSLATIONS
+var T={
+  en:{search:'Search VetMart...',deliver:'Deliver to',change:'Change',flash:'Flash Sale — Up to 70% OFF Sitewide!',flashSub:'Mobiles · Electronics · Fashion · Pet Care · Beauty',promo:'🎉 New Customer: 40% OFF · Free delivery ₹499+ · 2M+ happy buyers',rvTitle:'Continue Shopping',featBrTitle:'Featured Brands',featBrSub:'Deals up to 70% off',bsTitle:'🔥 Best Sellers',bsSub:'Most bought this week',cat18Title:'Shop by Category',revTitle:'⭐ Customer Reviews',slTitle:'Still Looking For?',logo:'India\'s #1 Marketplace',dir:'LTR · EN',n0:'Home',n1:'Explore',n2:'Sell',n3:'You',n4:'Cart',authTtl:'Welcome to VetMart'},
+  hi:{search:'VetMart पर खोजें...',deliver:'डिलीवरी करें',change:'बदलें',flash:'फ्लैश सेल — 70% तक की छूट!',flashSub:'मोबाइल · इलेक्ट्रॉनिक्स · फैशन · पेट केयर · ब्यूटी',promo:'🎉 नया ग्राहक: 40% छूट · ₹499+ पर मुफ्त डिलीवरी · 2M+ खुश खरीदार',rvTitle:'खरीदारी जारी रखें',featBrTitle:'फीचर्ड ब्रांड्स',featBrSub:'70% तक की डील्स',bsTitle:'🔥 बेस्ट सेलर',bsSub:'इस हफ्ते सबसे ज्यादा खरीदे',cat18Title:'श्रेणी से खरीदें',revTitle:'⭐ ग्राहक समीक्षाएं',slTitle:'और ढूंढ रहे हैं?',logo:'भारत का #1 मार्केटप्लेस',dir:'LTR · हि',n0:'होम',n1:'एक्सप्लोर',n2:'बेचें',n3:'आप',n4:'कार्ट',authTtl:'VetMart में आपका स्वागत'},
+  ar:{search:'ابحث في VetMart...',deliver:'توصيل إلى',change:'تغيير',flash:'تخفيضات — حتى 70% خصم!',flashSub:'جوالات · إلكترونيات · أزياء · رعاية الحيوانات · جمال',promo:'🎉 عميل جديد: خصم 40% · توصيل مجاني بـ 499₹',rvTitle:'متابعة التسوق',featBrTitle:'الماركات المميزة',featBrSub:'خصومات حتى 70%',bsTitle:'🔥 الأكثر مبيعاً',bsSub:'الأكثر شراءً هذا الأسبوع',cat18Title:'تسوق حسب الفئة',revTitle:'⭐ تقييمات العملاء',slTitle:'لا تزال تبحث عن؟',logo:'السوق الرقم 1 في الهند',dir:'RTL · عر',n0:'الرئيسية',n1:'استكشاف',n2:'بيع',n3:'أنت',n4:'سلة',authTtl:'مرحباً بك في VetMart'}
+};
+
+// ── HELPERS ──
+function $(id){try{return document.getElementById(id);}catch(e){return null;}}
+function setText(id,txt){var el=$(id);if(el)el.textContent=txt;}
+function setPlaceholder(id,txt){var el=$(id);if(el)el.placeholder=txt;}
+
+function fmtPrice(p){
+  try{
+    if(curr==='INR')return '₹'+p.INR.toLocaleString('en-IN');
+    if(curr==='USD')return '$'+p.USD;
+    if(curr==='AED')return 'AED '+p.AED;
+    return '₹'+p.INR.toLocaleString('en-IN');
+  }catch(e){return '₹0';}
+}
+function fmtMRP(p){
+  try{
+    if(curr==='INR')return '₹'+p.MRP.toLocaleString('en-IN');
+    if(curr==='USD')return '$'+(p.USD*1.25).toFixed(0);
+    if(curr==='AED')return 'AED '+(p.AED*1.3).toFixed(0);
+  }catch(e){return '';}
+}
+function offPct(p){try{return Math.round((1-p.INR/p.MRP)*100)+'% off';}catch(e){return '';}}
+function stars(n){var s='';for(var i=0;i<5;i++)s+=(i<n?'★':'☆');return s;}
+
+// ── RENDERS ──
+function renderCat18(){
+  try{
+    var el=$('cat18Grid');if(!el)return;
+    el.innerHTML=PRODS.slice(0,9).concat([
+      {em:'🎭',nm:'Trending'},{em:'🏷️',nm:'Clearance'},{em:'🎁',nm:'Gift Cards'}
+    ]).map(function(p,i){
+      if(i<10){
+        return '<div class="cat18-item" onclick="showT(\''+p.en.substring(0,20)+'...\')">'
+          +'<div class="cat18-img">'+p.em+'</div>'
+          +'<div class="cat18-nm">'+p.en.split(' ').slice(0,3).join(' ')+'</div>'
+          +'</div>';
+      }
+      return '<div class="cat18-item" onclick="showT(\'Loading...\')">'
+        +'<div class="cat18-img">'+p.em+'</div>'
+        +'<div class="cat18-nm">'+p.nm+'</div>'
+        +'</div>';
+    }).join('');
+  }catch(e){}
+}
+
+function renderCatNav(){
+  try{
+    CAT18_DATA.forEach(function(c,i){
+      var el=$('cl'+i);
+      if(el)el.textContent=c.nm[lang]||c.nm.en;
+    });
+  }catch(e){}
+}
+
+function renderRV(){
+  try{
+    var el=$('rvRow');if(!el)return;
+    el.innerHTML=PRODS.slice(0,6).map(function(p){
+      return '<div class="rv-card" onclick="openPD('+p.id+')">'
+        +'<div class="rv-img">'+p.em+'</div>'
+        +'<div class="rv-body">'
+        +'<div class="rv-nm">'+p[lang==='en'?'en':lang==='hi'?'hi':'en']+'</div>'
+        +'<div class="rv-pr">'+fmtPrice(p)+'</div>'
+        +'<div class="rv-off">'+offPct(p)+'</div>'
+        +'</div></div>';
+    }).join('');
+  }catch(e){}
+}
+
+function renderBrands(){
+  try{
+    var el=$('brandGridEl');if(!el)return;
+    el.innerHTML=BRANDS.map(function(b){
+      return '<div class="brand-tile" style="background:'+b.bg+'" onclick="showT(\'🛍️ Loading '+b.nm+'...\')">'
+        +'<div class="bt-off">'+b.off+'</div>'
+        +'<div class="bt-content"><div class="bt-em">'+b.em+'</div>'
+        +'<div class="bt-nm">'+b.nm+'</div>'
+        +'<div class="bt-sub">'+b.sub+'</div>'
+        +'</div></div>';
+    }).join('');
+  }catch(e){}
+}
+
+function renderProds(){
+  try{
+    var el=$('prodGrid');if(!el)return;
+    el.innerHTML=PRODS.map(function(p){
+      var inW=wishlist.has(p.id);
+      var nm=lang==='hi'?p.hi:lang==='ar'?p.ar:p.en;
+      return '<div class="pcard" onclick="openPD('+p.id+')">'
+        +'<div class="pc-imgw">'
+        +'<div class="pc-badges"><span class="pcb pcb-'+p.badge.toLowerCase()+'">'+p.badge+'</span></div>'
+        +'<div class="disc-lbl">'+offPct(p)+'</div>'
+        +'<div class="wish-ic'+(inW?' on':'')+'\" onclick="event.stopPropagation();togWish('+p.id+',this)\">'+(inW?'❤️':'🤍')+'</div>'
+        +'<div class="pc-em">'+p.em+'</div>'
+        +'</div>'
+        +'<div class="pc-body">'
+        +'<div class="pc-brand">'+p.brand+'</div>'
+        +'<div class="pc-en">'+nm+'</div>'
+        +'<div class="pc-rat"><span class="rat-stars">'+stars(Math.round(p.rat))+'</span><span class="rat-cnt">('+p.revs.toLocaleString()+')</span></div>'
+        +'<div class="pc-price-row"><span class="pc-price">'+fmtPrice(p)+'</span><span class="pc-mrp">'+fmtMRP(p)+'</span></div>'
+        +'<div class="pc-del">'+p.del+'</div>'
+        +'<button class="pc-atc" onclick="event.stopPropagation();addCart('+p.id+')">🛒 Add to Cart</button>'
+        +'</div></div>';
+    }).join('');
+  }catch(e){}
+}
+
+function renderQD(){
+  try{
+    var el=$('quickDeals');if(!el)return;
+    el.innerHTML=QDEALS.map(function(q){
+      var pr=curr==='INR'?'₹'+q.INR.toLocaleString('en-IN'):curr==='USD'?'$'+q.USD:'AED '+q.AED;
+      return '<div class="qdeal" onclick="showT(\'⚡ Loading deal...\')">'
+        +'<div class="qd-img">'+q.em+'</div>'
+        +'<div class="qd-info">'
+        +'<div class="qd-nm">'+q.nm+'</div>'
+        +'<div class="qd-sub">'+q.sub+'</div>'
+        +'<div class="qd-pr">'+pr+'</div>'
+        +'<div class="qd-off">'+q.off+'</div>'
+        +'</div>'
+        +'<button class="qd-btn" onclick="event.stopPropagation();showT(\'✅ Added to cart!\')">Add to Cart</button>'
+        +'</div>';
+    }).join('');
+  }catch(e){}
+}
+
+function renderRevs(){
+  try{
+    var el=$('reviewsRow');if(!el)return;
+    var all=REVS.concat(userRevs);
+    el.innerHTML=all.map(function(r){
+      return '<div class="rev-card">'
+        +'<div class="rev-meta"><div class="rev-av">'+r.av+'</div>'
+        +'<div><div class="rev-nm">'+r.nm+'</div><div class="rev-dt">'+r.dt+'</div>'
+        +'<div class="rev-stars">'+stars(r.stars)+'</div></div></div>'
+        +'<div class="rev-txt">'+r.txt+'</div>'
+        +'<div class="rev-prod">📦 '+r.prod+'</div>'
+        +(r.ver?'<div class="rev-ver">✅ Verified Purchase</div>':'')
+        +'</div>';
+    }).join('');
+  }catch(e){}
+}
+
+function renderStill(){
+  try{
+    var el=$('stillGrid');if(!el)return;
+    el.innerHTML=STILL.map(function(s){
+      return '<div class="still-item" onclick="showT(\'Loading '+s.nm+'...\')">'
+        +'<div class="si-img">'+s.em+'</div>'
+        +'<div class="si-lbl">'+s.nm+'</div>'
+        +'</div>';
+    }).join('');
+  }catch(e){}
+}
+
+// ── PRODUCT DETAIL ──
+function openPD(id){
+  try{
+    var p=PRODS.find(function(x){return x.id===id;});
+    if(!p)return;
+    setText('pdTtl',p.en);
+    var nm=lang==='hi'?p.hi:lang==='ar'?p.ar:p.en;
+    var desc=lang==='hi'?p.descHi:lang==='ar'?p.descAr:p.descEn;
+    $('pdBody').innerHTML=
+      '<div class="pd-gallery">'+p.em+'</div>'
+      +'<div class="pd-brand">'+p.brand+' · '+p.cat+'</div>'
+      +'<div class="pd-en">'+nm+'</div>'
+      +(lang==='hi'&&nm!==p.en?'<div class="pd-en" style="font-size:13px;font-weight:500;color:var(--ink2);margin-top:0">'+p.en+'</div>':'')
+      +(lang==='ar'?'<div class="pd-ar">'+p.en+'</div>':'')
+      +'<div class="pd-rat-row">'
+      +'<span class="pd-stars">'+stars(Math.round(p.rat))+'</span>'
+      +'<span class="pd-rat-num">'+p.rat+'</span>'
+      +'<span class="pd-rat-cnt">'+p.revs.toLocaleString()+' ratings</span>'
+      +'</div>'
+      +'<div style="margin:8px 0">'
+      +'<span class="pd-price-big">'+fmtPrice(p)+'</span>'
+      +'<span class="pd-mrp">'+fmtMRP(p)+'</span>'
+      +'<span class="pd-save"> '+offPct(p)+'</span>'
+      +'</div>'
+      +'<div class="pd-del">🚚 '+p.del+' · Dispatched in 24 hrs</div>'
+      +'<div style="font-size:10px;color:var(--muted);margin-top:3px">🏪 Sold by: <strong>'+p.seller+'</strong></div>'
+      +'<div class="pin-checker">'
+      +'<div style="font-size:12px;font-weight:700;color:var(--ink)">📍 Check Delivery</div>'
+      +'<div class="pin-row-d">'
+      +'<input class="pin-inp-d" id="pinInp" placeholder="Enter 6-digit pincode" maxlength="6" type="tel">'
+      +'<button class="pin-chk-btn" onclick="checkPin()">Check</button>'
+      +'</div>'
+      +'<div class="pin-result-d" id="pinResult"></div>'
+      +'</div>'
+      +'<div class="qty-sel-row">'
+      +'<span class="qty-lbl">Qty:</span>'
+      +'<div class="qty-ctrl">'
+      +'<button class="qty-b" onclick="chgQty(-1)">−</button>'
+      +'<span id="pdQty">1</span>'
+      +'<button class="qty-b" onclick="chgQty(1)">+</button>'
+      +'</div></div>'
+      +'<button class="pd-atc" onclick="addCart('+id+');showT(\'✅ Added to cart!\')">🛒 Add to Cart</button>'
+      +'<button class="pd-buy" onclick="addCart('+id+');closeM(\'pdM\');openM(\'cartM\');renderCart();showT(\'💳 Checkout...\')">⚡ Buy Now</button>'
+      +'<div class="desc-box"><div class="desc-ttl">About this product</div>'
+      +'<div style="font-size:12px;color:var(--muted);line-height:1.8">'+desc+'</div>'
+      +'</div>'
+      +'<div class="spec-table">'
+      +'<div class="spec-row"><div class="spec-k">Brand</div><div class="spec-v">'+p.brand+'</div></div>'
+      +'<div class="spec-row"><div class="spec-k">Category</div><div class="spec-v">'+p.cat+'</div></div>'
+      +'<div class="spec-row"><div class="spec-k">Rating</div><div class="spec-v">'+p.rat+'/5 ('+p.revs.toLocaleString()+')</div></div>'
+      +'<div class="spec-row"><div class="spec-k">Seller</div><div class="spec-v">'+p.seller+'</div></div>'
+      +'<div class="spec-row"><div class="spec-k">Delivery</div><div class="spec-v">'+p.del+'</div></div>'
+      +'</div>';
+    openM('pdM');
+  }catch(e){console.warn('openPD',e);}
+}
+
+var pdQtyN=1;
+function chgQty(d){try{pdQtyN=Math.max(1,Math.min(10,pdQtyN+d));var el=$('pdQty');if(el)el.textContent=pdQtyN;}catch(e){}}
+function checkPin(){
+  try{
+    var inp=$('pinInp'),res=$('pinResult');
+    if(!inp||!res)return;
+    var v=inp.value.trim();
+    if(v.length!==6||isNaN(v)){showT('⚠️ Enter valid 6-digit pincode');return;}
+    inp.disabled=true;
+    setTimeout(function(){
+      res.style.display='block';
+      res.textContent='✅ Delivery available! Expected tomorrow · Free delivery';
+      inp.disabled=false;
+    },800);
+  }catch(e){}
+}
+
+// ── CART ──
+function addCart(id){
+  try{
+    var p=PRODS.find(function(x){return x.id===id;});
+    if(!p)return;
+    var ex=cart.find(function(x){return x.id===id;});
+    if(ex)ex.qty++;else cart.push({id:id,p:p,qty:1});
+    updBdg();showT('✅ '+p.en.substring(0,22)+'... added!');
+  }catch(e){}
+}
+function updBdg(){
+  try{
+    var tot=cart.reduce(function(a,c){return a+c.qty;},0);
+    var cb=$('cBdg'),nb=$('navBdg');
+    if(tot>0){
+      if(cb){cb.style.display='flex';cb.textContent=tot;}
+      if(nb){nb.style.display='flex';nb.textContent=tot;}
+    }else{
+      if(cb)cb.style.display='none';
+      if(nb)nb.style.display='none';
+    }
+  }catch(e){}
+}
+function renderCart(){
+  try{
+    var el=$('cartBody');if(!el)return;
+    if(!cart.length){
+      el.innerHTML='<div style="text-align:center;padding:40px 0"><div style="font-size:60px">🛒</div><div style="font-size:16px;font-weight:800;color:var(--ink);margin:12px 0 6px">Your cart is empty</div><div style="font-size:12px;color:var(--muted);margin-bottom:18px">Add products to get started</div><button class="fbtn amazon-yel" onclick="closeM(\'cartM\')">Continue Shopping →</button></div>';
+      return;
+    }
+    var totINR=cart.reduce(function(a,c){return a+c.p.INR*c.qty;},0);
+    var totMRP=cart.reduce(function(a,c){return a+c.p.MRP*c.qty;},0);
+    var saved=totMRP-totINR;
+    var delFee=totINR>=499?0:49;
+    var total=totINR+delFee;
+    el.innerHTML=cart.map(function(item){
+      return '<div class="cart-row">'
+        +'<div class="ci-img">'+item.p.em+'</div>'
+        +'<div class="ci-info">'
+        +'<div class="ci-nm">'+item.p.en+'</div>'
+        +'<div class="ci-brand">'+item.p.brand+'</div>'
+        +'<div class="ci-pr">'+fmtPrice(item.p)+'</div>'
+        +'<div class="qty-ctrl-sm">'
+        +'<button class="qb" onclick="chCart('+item.p.id+',-1)">−</button>'
+        +'<span class="qn">'+item.qty+'</span>'
+        +'<button class="qb" onclick="chCart('+item.p.id+',1)">+</button>'
+        +'<span class="q-del" onclick="rmCart('+item.p.id+')">Remove</span>'
+        +'</div></div></div>';
+    }).join('')
+    +'<div class="cart-sum">'
+    +'<div class="sum-row"><span>MRP Total</span><span>₹'+totMRP.toLocaleString('en-IN')+'</span></div>'
+    +'<div class="sum-row"><span>Discount</span><span class="sum-grn">−₹'+saved.toLocaleString('en-IN')+'</span></div>'
+    +'<div class="sum-row"><span>Delivery</span><span class="sum-grn">'+(delFee?'₹'+delFee:'FREE')+'</span></div>'
+    +'<div class="sum-row tot"><span>Total</span><span>₹'+total.toLocaleString('en-IN')+'</span></div>'
+    +'</div>'
+    +'<button class="ck-btn" onclick="showT(\'💳 Proceeding to checkout...\')">💳 Checkout — ₹'+total.toLocaleString('en-IN')+'</button>';
+  }catch(e){}
+}
+function chCart(id,d){try{var i=cart.find(function(x){return x.id===id;});if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(function(x){return x.id!==id;});updBdg();renderCart();}catch(e){}}
+function rmCart(id){try{cart=cart.filter(function(x){return x.id!==id;});updBdg();renderCart();showT('Removed');}catch(e){}}
+
+// ── WISHLIST ──
+function togWish(id,btn){
+  try{
+    if(wishlist.has(id)){wishlist.delete(id);if(btn){btn.textContent='🤍';btn.classList.remove('on');}showT('Removed from wishlist');}
+    else{wishlist.add(id);if(btn){btn.textContent='❤️';btn.classList.add('on');}showT('❤️ Added to wishlist!');}
+  }catch(e){}
+}
+
+// ── MODALS ──
+function openM(id){try{var el=$(id);if(el){el.classList.add('open');document.body.style.overflow='hidden';}}catch(e){}}
+function closeM(id){try{var el=$(id);if(el)el.classList.remove('open');if(!document.querySelectorAll('.overlay.open').length)document.body.style.overflow='';}catch(e){}}
+
+// ── TOAST ──
+var toastT;
+function showT(msg){
+  try{
+    var el=$('toast');if(!el)return;
+    el.textContent=msg;el.classList.add('on');
+    clearTimeout(toastT);toastT=setTimeout(function(){try{el.classList.remove('on');}catch(e){}},2500);
+  }catch(e){}
+}
+
+// ── LANGUAGE ENGINE (FULL RTL/LTR) ──
+function setLang(l,btn){
+  try{
+    lang=l;
+    document.querySelectorAll('.lpill').forEach(function(p){p.classList.remove('on');});
+    if(btn)btn.classList.add('on');
+    var root=$('ROOT'),body=document.body;
+    body.classList.remove('ar-mode','hi-mode');
+    root.removeAttribute('dir');
+    if(l==='ar'){
+      root.setAttribute('dir','rtl');
+      body.classList.add('ar-mode');
+    } else if(l==='hi'){
+      body.classList.add('hi-mode');
+    }
+    var tx=T[l]||T.en;
+    // Apply all translations
+    setText('dirLbl',tx.dir);
+    setText('logoTag',tx.logo);
+    setPlaceholder('srchInp',tx.search);
+    setText('flashTtl',tx.flash);
+    setText('flashSub',tx.flashSub);
+    setText('promoTxt',tx.promo);
+    setText('rvTitle',tx.rvTitle);
+    setText('featBrTitle',tx.featBrTitle);
+    setText('featBrSub',tx.featBrSub);
+    setText('bsTitle',tx.bsTitle);
+    setText('bsSub',tx.bsSub);
+    setText('cat18Title',tx.cat18Title);
+    setText('revTitle',tx.revTitle);
+    setText('slTitle',tx.slTitle);
+    setText('authTtl',tx.authTtl);
+    ['n0','n1','n2','n3','n4'].forEach(function(k){setText(k,tx[k]||'');});
+    // Location bar
+    var addrBtn=$('addrBtn');if(addrBtn)addrBtn.textContent=tx.change;
+    // Re-render dynamic content
+    renderCatNav();
+    renderRV();
+    renderProds();
+    renderRevs();
+  }catch(e){}
+}
+
+// ── CURRENCY ──
+function setCurr(c,btn){
+  try{
+    curr=c;
+    document.querySelectorAll('.cpill').forEach(function(p){p.classList.remove('on');});
+    if(btn)btn.classList.add('on');
+    renderProds();renderRV();renderQD();
+    showT('Currency: '+c+' ✓');
+  }catch(e){}
+}
+
+// ── CATEGORY NAV ──
+function actCat(el,idx){
+  try{
+    document.querySelectorAll('.cat-icon').forEach(function(c){
+      c.querySelector('.ci-box').style.outline='';
+    });
+    el.querySelector('.ci-box').style.outline='2.5px solid var(--or)';
+    showT('Loading '+CAT18_DATA[idx].nm.en+'...');
+  }catch(e){}
+}
+
+// ── BOTTOM NAV ──
+function setNav(el){
+  try{
+    document.querySelectorAll('.bot-nav .ni').forEach(function(n){n.classList.remove('on');});
+    el.classList.add('on');
+  }catch(e){}
+}
+
+// ── SEARCH ──
+var srchT;
+function doSearch(val){
+  try{
+    clearTimeout(srchT);
+    srchT=setTimeout(function(){
+      var drop=$('srchDrop');if(!drop)return;
+      if(!val||val.length<2){drop.classList.remove('open');return;}
+      var res=PRODS.filter(function(p){
+        var q=val.toLowerCase();
+        return p.en.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q);
+      }).slice(0,5);
+      if(!res.length){drop.classList.remove('open');return;}
+      drop.innerHTML=res.map(function(p){
+        return '<div class="sug-row" onclick="openPD('+p.id+');$$(\'srchDrop\').classList.remove(\'open\')">'
+          +'<div class="sug-em">'+p.em+'</div>'
+          +'<div class="sug-info"><div class="sug-nm">'+p.en+'</div><div class="sug-sub">'+p.cat+' · '+p.brand+'</div></div>'
+          +'<div class="sug-pr">'+fmtPrice(p)+'</div>'
+          +'</div>';
+      }).join('');
+      drop.classList.add('open');
+    },250);
+  }catch(e){}
+}
+window.$$=function(id){return $(id);};
+document.addEventListener('click',function(e){
+  try{var d=$('srchDrop');if(d&&!d.contains(e.target)&&e.target.id!=='srchInp')d.classList.remove('open');}catch(e){}
+});
+
+// ── AUTH ──
+function swAuth(btn,t){
+  try{
+    document.querySelectorAll('.atab').forEach(function(a){a.classList.remove('on');});
+    btn.classList.add('on');
+    var lg=$('lgF'),sg=$('sgF');
+    if(lg)lg.style.display=t==='lg'?'block':'none';
+    if(sg)sg.style.display=t==='sg'?'block':'none';
+  }catch(e){}
+}
+
+// ── PAYMENT ──
+function selPay(el){
+  try{
+    document.querySelectorAll('.pay-c').forEach(function(c){c.classList.remove('on');});
+    el.classList.add('on');
+    showT('✅ '+el.querySelector('.pay-nm').textContent+' selected');
+  }catch(e){}
+}
+
+// ── FAQ ──
+function togFAQ(btn){
+  try{
+    var ans=btn.nextElementSibling;
+    var open=ans.classList.contains('open');
+    document.querySelectorAll('.faq-ans.open').forEach(function(a){
+      a.classList.remove('open');
+      if(a.previousElementSibling)a.previousElementSibling.classList.remove('open');
+    });
+    if(!open){ans.classList.add('open');btn.classList.add('open');}
+  }catch(e){}
+}
+
+// ── REVIEW SUBMIT ──
+function setRating(n){
+  try{
+    userRating=n;
+    document.querySelectorAll('.sp-btn').forEach(function(b,i){b.classList.toggle('on',i<n);});
+  }catch(e){}
+}
+function submitRev(){
+  try{
+    var txt=$('wr-inp').value.trim();
+    var nm=$('wr-nm').value.trim();
+    if(!txt){showT('⚠️ Please write your review!');return;}
+    if(!nm){showT('⚠️ Please enter your name!');return;}
+    if(!userRating){showT('⚠️ Please select a star rating!');return;}
+    userRevs.unshift({av:'😊',nm:nm,dt:'Just now',stars:userRating,txt:txt,prod:'VetMart Product',ver:false});
+    $('wr-inp').value='';$('wr-nm').value='';setRating(0);
+    renderRevs();
+    showT('🎉 Review submitted! Thank you!');
+  }catch(e){}
+}
+
+// ── IMPORT TOOL ──
+var impT;
+function handleImport(val){
+  try{
+    clearTimeout(impT);
+    var prev=$('impPrev');
+    if(!val||val.length<10){if(prev)prev.classList.remove('show');return;}
+    impT=setTimeout(function(){
+      try{
+        var src=val.includes('amazon')?'Amazon':val.includes('flipkart')?'Flipkart':val.includes('chewy')?'Chewy':'External';
+        var items=[{em:'🐾',nm:'Premium Pet Product',pr:1299},{em:'📦',nm:'Quality Bundle Pack',pr:2499},{em:'💊',nm:'Health Supplement',pr:599}];
+        var item=items[Math.floor(Math.random()*items.length)];
+        setText('impEm',item.em);setText('impNm',item.nm);
+        setText('impPr','₹'+item.pr);setText('impSrc','Source: '+src);
+        if(prev)prev.classList.add('show');
+      }catch(e){}
+    },800);
+  }catch(e){}
+}
+function importProd(){
+  try{
+    var nm=$('impNm').textContent;
+    showT('✅ "'+nm+'" listed on VetMart!');
+    $('impUrl').value='';$('impPrev').classList.remove('show');
+  }catch(e){}
+}
+
+// ── SELLER LISTING ──
+function listProduct(){
+  try{
+    var tEn=$('pTitleEn'),pp=$('pPrice');
+    if(!tEn||!tEn.value.trim()){showT('⚠️ Product title is required!');return;}
+    if(!pp||!pp.value){showT('⚠️ Selling price is required!');return;}
+    var pr=parseInt(pp.value)||999;
+    var newP={
+      id:PRODS.length+1,
+      brand:($('pBrand')&&$('pBrand').value)||'My Brand',
+      em:($('pEmoji')&&$('pEmoji').value)||'📦',
+      en:tEn.value,
+      hi:($('pTitleHi')&&$('pTitleHi').value)||tEn.value,
+      ar:($('pTitleAr')&&$('pTitleAr').value)||tEn.value,
+      descEn:($('pDescEn')&&$('pDescEn').value)||'Quality product.',
+      descHi:($('pDescHi')&&$('pDescHi').value)||'उत्तम उत्पाद।',
+      descAr:($('pDescAr')&&$('pDescAr').value)||'منتج ممتاز.',
+      INR:pr,MRP:Math.round(pr*1.4),USD:Math.round(pr/83),AED:Math.round(pr/22.5),
+      cat:($('pCat')&&$('pCat').value)||'General',
+      rat:0,revs:0,badge:'NEW',del:'Standard delivery',seller:'My VetMart Store'
+    };
+    PRODS.push(newP);
+    ['pTitleEn','pTitleHi','pTitleAr','pBrand','pPrice','pMrp','pStock','pEmoji','pDescEn','pDescHi','pDescAr'].forEach(function(id){var el=$(id);if(el)el.value='';});
+    renderProds();
+    showT('🎉 Product listed! Live on VetMart now!');
+    closeM('sellerM');
+    setTimeout(function(){showT('📦 Visible to 2M+ buyers!');},2000);
+  }catch(e){showT('Error: '+e.message);}
+}
+
+// ── BANNER DOTS ──
+function updDots(sc){
+  try{
+    var idx=Math.round(sc.scrollLeft/sc.offsetWidth);
+    document.querySelectorAll('.bdot').forEach(function(d,i){d.classList.toggle('on',i===idx);});
+  }catch(e){}
+}
+
+// ── TIMER ──
+function runTimer(){
+  try{
+    if(timerSec<=0)timerSec=10800;
+    timerSec--;
+    var h=Math.floor(timerSec/3600),m=Math.floor((timerSec%3600)/60),s=timerSec%60;
+    var tH=$('tH'),tM=$('tM'),tS=$('tS');
+    if(tH)tH.textContent=(h<10?'0':'')+h;
+    if(tM)tM.textContent=(m<10?'0':'')+m;
+    if(tS)tS.textContent=(s<10?'0':'')+s;
+  }catch(e){}
+}
+
+// ── AUTO SLIDE ──
+function autoSlide(){
+  try{
+    var sc=$('bnrScroll');if(!sc)return;
+    slideIdx=(slideIdx+1)%4;
+    sc.scrollTo({left:slideIdx*sc.offsetWidth,behavior:'smooth'});
+  }catch(e){}
+}
+
+// ── OTP AUTO JUMP ──
+document.addEventListener('input',function(e){
+  try{
+    if(e.target.classList.contains('otp-i')){
+      var boxes=Array.from(e.target.closest('.otp-boxes').querySelectorAll('.otp-i'));
+      var idx=boxes.indexOf(e.target);
+      if(e.target.value&&idx<boxes.length-1)boxes[idx+1].focus();
+    }
+  }catch(e){}
+});
+
+// ── INIT ──
+function init(){
+  try{
+    renderRV();
+    renderBrands();
+    renderProds();
+    renderQD();
+    renderRevs();
+    renderStill();
+    renderCatNav();
+    renderCat18();
+    setInterval(runTimer,1000);
+    setInterval(autoSlide,5000);
+  }catch(e){console.warn('Init error:',e);}
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+else{init();}
+</script>
+</body>
+</html>
